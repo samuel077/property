@@ -37,7 +37,7 @@
 	
 	    <img src="<?=base_url("/public/image/secondImage.png")?>" height:450px; width:auto;>
             <div class="carousel-caption">
-              <h1>我是仁竑老師</h1>
+              <h1>我是仁竑老蘇</h1>
 	      <p>借了東西就要還哦。</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">我要還財產</a></p>
             </div>

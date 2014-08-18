@@ -13,7 +13,7 @@
 <div class="container">
 <div class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="./home.php">HSNG(ANT)</a>
+    <a class="navbar-brand" href="./index.php">HSNG(ANT)</a>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li class="dropdown">

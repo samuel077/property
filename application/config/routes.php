@@ -38,9 +38,7 @@
 |
 */
 
-$route['default_controller'] = "home";
-$route['(:any)'] = "home";
-$route['news'] = "news";
+$route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
