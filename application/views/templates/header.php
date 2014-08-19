@@ -32,6 +32,7 @@
                 <li><a href="#">財產借用列表</a></li>
               </ul>
           </li>
+	  <?php if($session['userRole'] == "admin") : ?>
 	  <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理者專區<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -42,6 +43,7 @@
                 <li><a href="#">危險財產清單</a></li>
               </ul>
           </li>
+	  <? endif; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
 	  <li> <a href="#">註冊</a></li>
