@@ -1,7 +1,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><?php echo $title ?> - CodeIgniter 2 Tutorial</title>
+	<title><?php echo $title?></title>
 	<link rel="stylesheet" href="<?=base_url("/public/css/bootstrap.min.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/public/css/navbar.css")?>">
 	<!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
