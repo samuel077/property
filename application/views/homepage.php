@@ -12,18 +12,24 @@
       <div class="carousel-inner">
         <div class="item active">
           <div class="container">
-	    <div class="jumbotron" style="height:550; width:auto;">
+	    <div style="height:550px; width:auto; background-color:black;">
+	    </div>
+<!--
+	    <div class="jumbotron"  style="height:550px; width:auto;">
               <h1>開發中的財產管理系統</h1>
 	      <p>測試中…</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">登入</a></p>
 	    </div>
+-->
             <div class="carousel-caption">
+		<h1> 開發中的財產管理系統 </h1>	
+              	<p><a class="btn btn-lg btn-primary" href="#" role="button">登入</a></p>
             </div>
           </div>
         </div>
         <div class="item">
           <div class="container">
-	    <div style="height:550; width:auto; background-color:black;">
+	    <div style="height:550px; width:auto; background-color:black;">
 	    </div>
             <div class="carousel-caption">
               <h1>HSNG大放送</h1>
@@ -37,7 +43,7 @@
 	
 	    <img src="<?=base_url("/public/image/secondImage.png")?>" height:450px; width:auto;>
             <div class="carousel-caption">
-              <h1>我是仁竑老蘇</h1>
+              <h1>仁竑好帥</h1>
 	      <p>借了東西就要還哦。</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">我要還財產</a></p>
             </div>
