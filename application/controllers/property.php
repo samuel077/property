@@ -2,8 +2,15 @@
 
 class Property extends CI_Controller {
 
+	public function __construct(){
+                parent::__construct();
+                session_start();
+        }
+	
         public function index()
-        {
+        {	
+		$data['title'] = "HSNG 財產管理平台";
+		
                 $this->load->view('templates/header', $data);
                 $this->load->view('homepage', $data);
                 $this->load->view('templates/footer');
