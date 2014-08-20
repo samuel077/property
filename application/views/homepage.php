@@ -30,8 +30,8 @@
         <div class="item">
           <div class="container">
 	    <img src="<?=base_url("/public/image/birdannoy.png")?>" height:450px; width:auto;/>
-	    <div style="height:550px; width:auto; background-color:black;">
-	    </div>
+	    <!--<div style="height:550px; width:auto; background-color:black;">
+	    </div> -->
             <div class="carousel-caption">
               <h1>HSNG大放送</h1>
 	      <p>實驗室財產任你用!! ya~ (開玩笑的)</p>
