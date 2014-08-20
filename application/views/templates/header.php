@@ -44,7 +44,7 @@
                 <li><a href="#">危險財產清單</a></li>
               </ul>
           </li>
-	  <? endif; ?>
+	  	<? endif; ?>
 	  <? endif; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -55,3 +55,5 @@
     </div><!--/.container-fluid -->
   </div>
 
+  <!-- fixed size container -->
+  <div style="height:550; width:auto;">
