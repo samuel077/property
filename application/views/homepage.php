@@ -29,6 +29,7 @@
         </div>
         <div class="item">
           <div class="container">
+	    <img src="<?=base_url("/public/image/birdannoy.png")?>" height:450px; width:auto;/>
 	    <div style="height:550px; width:auto; background-color:black;">
 	    </div>
             <div class="carousel-caption">
@@ -41,7 +42,7 @@
         <div class="item">
           <div class="container">
 	
-	    <img src="<?=base_url("/public/image/secondImage.png")?>" height:450px; width:auto;>
+	    <img src="<?=base_url("/public/image/secondImage.png")?>" height:450px; width:auto;/>
             <div class="carousel-caption">
               <h1>仁竑好帥</h1>
 	      <p>借了東西就要還哦。</p>
