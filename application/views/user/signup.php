@@ -5,7 +5,6 @@
 <?php
     echo from_open('users/signup');
 ?>
-
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者帳號</label>
             <div class = "col-sm-4">
@@ -71,5 +70,5 @@
             </div>
         </div>
     </div>
-    </form>
+</form>
 

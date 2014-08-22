@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Users extends CI_Controller {
+Class User extends CI_Controller {
 
         public function index()
         {
                 $this->load->view('templates/header', $data);
-                $this->load->view('homepage', $data);
+                $this->load->view('user/signup', $data);
                 $this->load->view('templates/footer');
         }
 
@@ -20,9 +20,10 @@ Class Users extends CI_Controller {
         public function edit($userId) {
                 echo $userrId;
         }
+
         public function signup()
         {
-            $this->load->helper('form');
+            $this->load->helper(aray('form','url'));
             $this->load->library('form_validation');
 
             $data['title'] = 'Sign up';
@@ -71,17 +72,17 @@ Class Users extends CI_Controller {
             if ($this->form_validation->run('signup') == FALSE)
             {
                 $this->load->view('templates/header', $data);
-                $this->load->view('users/signup_success');
+                $this->load->view('users/signup');
                 $this->load->view('templates/footer');
             }
             else
             {
                 $this->news_model->set_news();
                 $this->load->view('templates/header', $data);
-                $this->load->view('news/success');
+                $this->load->view('users/signup_success');
                 $this->load->view('templates/footer');
             }
         }
-    }
+
 }
 ?>
