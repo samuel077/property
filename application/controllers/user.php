@@ -1,12 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 Class User extends CI_Controller {
-
+    
+    
+        public function __construct()
+        {
+            parent::__construct();
+            $this->load->model('user_model');
+        }
+        
         public function index()
         {
-                $this->load->view('templates/header', $data);
-                $this->load->view('user/signup', $data);
-                $this->load->view('templates/footer');
+            /* 
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/signup', $data);
+            $this->load->view('templates/footer');
+             */
         }
 
         public function create($param) {
@@ -23,7 +32,8 @@ Class User extends CI_Controller {
 
         public function signup()
         {
-            $this->load->helper(aray('form','url'));
+
+            $this->load->helper('form');
             $this->load->library('form_validation');
 
             $data['title'] = 'Sign up';
@@ -34,7 +44,7 @@ Class User extends CI_Controller {
                         array(
                             'field' => 'account',
                             'label' => 'User Account',
-                            'rules' => 'trim|required|min_length[5]|max_length[20]|is_unique[users.account]'
+                            'rules' => 'trim|required|min_length[5]|max_length[20]|xss_clean'
                         ),
                         array(
                             'field' => 'passwd',
@@ -59,7 +69,7 @@ Class User extends CI_Controller {
                         array(
                             'field' => 'email',
                             'label' => 'User E-Mail',
-                            'rules' => 'trim|required|vaild_email|is_unique[users.email]'
+                            'rules' => 'trim|required|valid_email'
                         ),
                         array(
                             'field' => 'enroll_year',
@@ -69,20 +79,25 @@ Class User extends CI_Controller {
                     )
                 ); 
 
-            if ($this->form_validation->run('signup') == FALSE)
+            if ($this->form_validation->run() == FALSE)
             {
                 $this->load->view('templates/header', $data);
-                $this->load->view('users/signup');
+                $this->load->view('user/signup');
                 $this->load->view('templates/footer');
             }
             else
             {
-                $this->news_model->set_news();
-                $this->load->view('templates/header', $data);
-                $this->load->view('users/signup_success');
-                $this->load->view('templates/footer');
+                $this->user_model->add_user();
+                $this->signup_success();
             }
         }
 
+        public function signup_success()
+        {
+            $data['title'] = 'Sign up';
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/signup_success');
+            $this->load->view('templates/footer');
+        }
 }
 ?>
