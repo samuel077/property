@@ -56,4 +56,4 @@
   </div>
 
   <!-- fixed size container -->
-  <div style="height:550; width:auto;">
+  <div style="height:700; width:auto;">
