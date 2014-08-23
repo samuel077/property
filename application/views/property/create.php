@@ -1,5 +1,5 @@
 	<!-- we need a form here.-->
-	<div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:180;"><b>新建財產</b><small><b>手動輸入</b></small></h1></div> 
+	<!-- <div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:180;"><b>新建財產</b><small><b>手動輸入</b></small></h1></div> -->
 	<div style="margin-top:30px;">
 	<?php
     		echo validation_errors();

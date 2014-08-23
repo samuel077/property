@@ -9,7 +9,14 @@ class Property_model extends CI_Model {
 
         public function get_property($propertyId = FALSE)
         {
-                if ($propertyId === FALSE)
+		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name 
+			from property pr, location lo, property_type pt 
+			where pr.location_id = lo.id AND pr.property_type = pt.id";
+	
+		$query = $this->db->query($sql);
+		return $query->result_array();
+ 		/*               
+		if ($propertyId == FALSE)
                 {
 			// get all property
                         $query = $this->db->get('property');
@@ -18,6 +25,7 @@ class Property_model extends CI_Model {
 
                 $query = $this->db->get_where('property', array('id' => $propertyId));
                 return $query->row_array();
+		*/
         }
 
 	

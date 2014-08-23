@@ -13,13 +13,13 @@
 <div class="container">
 <div class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="./index.php">HSNG(ANT)</a>
+    <a class="navbar-brand" href="<?=base_url("/index.php")?>">HSNG(ANT)</a>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">實驗室財產<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">財產列表(借用)</a></li>
+                <li><a href="<?=base_url("/property/")?>">財產列表(借用)</a></li>
 		<li class="divider"></li>
                 <li><a href="#">年度可報廢財產</a></li>
               </ul>
@@ -57,3 +57,8 @@
 
   <!-- fixed size container -->
   <div style="height:700; width:auto;">
+	<?php if( !empty($pageHeaderBig)) : ?>
+	<!-- we need a form here.-->
+        <div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:180;"><b><?php echo $pageHeaderBig;?></b><small><b><?php echo $pageHeaderSmall;?></b></small></h1></div>
+	<?php endif; ?>
+
