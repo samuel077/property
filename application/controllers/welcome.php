@@ -13,6 +13,7 @@ class Welcome extends CI_Controller {
 		$_SESSION['username'] = "s750716@gmail.com";
 		$_SESSION['userRole'] = "admin";
 		$data['session'] = $_SESSION;
+		$data['is_admin'] = true;
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('homepage', $data);
