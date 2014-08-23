@@ -14,13 +14,9 @@ class Property extends CI_Controller {
 		$data['propertyList'] = $this->property_model->get_property();
 		$data['pageHeaderBig'] = "財產列表";
 		$data['pageHeaderSmall'] = "全部列表";
+		$data['session'] = $_SESSION;
+		$data['is_admin'] = true;
 		
-		/*	
-		echo "<pre>";
-		print_r($data['propertyList']);
-		echo "</pre>";
-		*/
-                
 		$this->load->view('templates/header', $data);
                 $this->load->view('property/index', $data);
                 $this->load->view('templates/footer');
@@ -66,6 +62,7 @@ class Property extends CI_Controller {
 
         public function create() {
 		
+		$data['session'] = $_SESSION;
 		$data['title'] = "財產管理平台 新建財產";
 		$data['pageHeaderBig'] = "新建財產";
 		$data['pageHeaderSmall'] = "手動輸入";	

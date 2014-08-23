@@ -32,12 +32,14 @@
                 <li><a href="#">財產借用列表</a></li>
               </ul>
           </li>
-	  <?php if(isset($session)) : ?>
-	  	<?php if($session['userRole'] == "admin") : ?>
+	  <?php if(isset($is_admin)) : ?>
+	  	<?php if($is_admin) : ?>
 	  <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理者專區<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">使用者匯入/匯出</a></li>
+		<li class="divider"></li>
+                <li><a href="<?=base_url("/property/create")?>">財產單筆新建</a></li>
 		<li class="divider"></li>
                 <li><a href="#">財產匯入/匯出</a></li>
 		<li class="divider"></li>
