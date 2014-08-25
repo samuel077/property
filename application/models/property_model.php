@@ -57,11 +57,32 @@ class Property_model extends CI_Model {
 			'brand' => $this->input->post('brand'),
 			'location_id' => $this->input->post('location'),
 			'present_value' => $this->input->post('currentValue'),
+			'property_type' => $this->input->post('property_type'),
 			'note' => $this->input->post('note')
 		);
 		$this->db->insert('property', $property);
 	}
 
+	public function update_property_by_id(){
+		$data = array(
+			'name' => $this->input->post('name'), 
+			'serial_id' => $this->input->post('serial_id'), 
+			'purchase_date' => $this->input->post('purchase_date'), 
+			'expire_info' => $this->input->post('expire_info'), 
+			'brand' => $this->input->post('brand'), 
+			'location_id' => $this->input->post('location'), 
+			'present_value' => $this->input->post('currentValue'), 
+			'property_type' => $this->input->post('property_type'), 
+			'note' => $this->input->post('note') 
+			);
+		$this->db->where('id', $this->input->post('id'));
+		$this->db->update('property', $data);
+		// 有 update 成功，affected_rows() = 1
+		if( $this->db->affected_rows() > 0 )
+			return TRUE;
+		else
+			return FALSE;
+	}
 
         // insert part.
 	/*
