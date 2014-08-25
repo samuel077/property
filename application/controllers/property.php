@@ -71,26 +71,11 @@ class Property extends CI_Controller {
         }
 	
 	// actually this is not a real remove. we simply set is delete as true;
-        public function remove($propertyId) {
+        public function remove() {
 	
 		// we need to check is admin trigger this action or not.
-
-		die("got you");
-		
-		$data['propertyId'] = $propertyId;		
-		$data['title'] = "財產管理平台 移除財產";		
-		
-		// remove : set property table is_delete as true;
-		if($this->removeProperty($propertyId)){
-			$this->load->view('templates/header', $data);
-			$this->load->view('property/deleteSuccess', $data);
-			$this->load->view('templates/footer');
-		}
-		else{
-			$this->load->view('templates/header', $data);
-			$this->load->view('property/deleteFail', $data);
-			$this->load->view('templates/footer');
-		}
+		$data['updateSuccess'] = $this->property_model->update_property_by_id();
+		redirect('/property', 'refresh');	
         }
 
         public function import($propertyId) {

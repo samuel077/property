@@ -29,7 +29,7 @@
 				<td> 
 					<button type="button" class="btn btn-warning" data-target="#update<?php echo $value['serial_id']?>" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
 					&nbsp;
-					<button type="submit" class="btn btn-danger" onclick="window.localtion.href='<?=base_url("/property/remove/".$value['id'])?>'"><span class="glyphicon glyphicon-trash"></span></button>
+					<button type="button" class="btn btn-danger" data-target="#delete<?php echo $value['serial_id']?>" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></button>
 				</td>
 				<?php endif; ?>
 			<?php endif; ?>
@@ -209,93 +209,27 @@
   </div>
 </div>
 <?php endforeach; ?>
-<!--
-<div class="modal fade" id="update33445566" style="align:center; font-family:Microsoft JhengHei;">
+
+<?php foreach($propertyList as $list => $value) :?>
+<div class="modal fade" id="delete<?php echo $value['serial_id']?>" style="align:center; font-family:Microsoft JhengHei;">
   <div class="modal-dialog">
     <div class="modal-content">
-	<form class="form-horizontal" id="update_form_1" role="form" action="http://106.185.33.196/property/property/update/1" method="post">
+      <form class="form-horizontal" role="form" action="./property/remove/" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title"><span class="glyphicon glyphicon-list"></span> &nbsp; <b>財產詳細資訊</b></h4>
       </div>
       <div class="modal-body">
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">產編：</label>
-	    <div class="col-sm-5">
-	      <input type="text" class="form-control" value="33445566" id="serial_number" />
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">廠牌：</label>
-	    <div class="col-sm-5">
-	      <input type="text" class="form-control" value="Asus" id="brand"/>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">地點：</label>
-	    <div class="col-sm-5">
-                     <select class="form-control" id="location" name="location">
-                       		       <option value="1" selected>LAB315</option>
-		       		       <option value="2" >LAB416</option>
-		       		       <option value="3" >LAB402</option>
-		       		       <option value="4" >LAB510</option>
-		       		       <option value="5" >LAB501A</option>
-		       		       <option value="6" >LAB501B</option>
-		       		       <option value="7" >LAB004</option>
-		       		     </select>
-	    </div>
-	  </div>
-	  <div class="form-group">
-                        <label class="col-sm-3 control-label" for="property_type">種類：</label>
-                        <div class="col-sm-5">
-                                <select class="form-control" id="property_type" name="property_type">
-                                                                        <option value="1" selected>筆記型電腦</option>
-                                                                        <option value="2" >LCD液晶營幕</option>
-                                                                        <option value="3" >LED液晶營幕</option>
-                                                                        <option value="4" >桌上型電腦</option>
-                                                                        <option value="5" >智慧型手機</option>
-                                                                        <option value="6" >平版電腦</option>
-                                                                </select>
-                        </div>
-          </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">借用人：</label>
-	    <div class="col-sm-5">
-	      <p class="form-control-static">TBD</p>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">購買日期：</label>
-	    <div class="col-sm-5">
-	      <input type="date" class="form-control" value="2014-08-24" id="purchase_date"/>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">財產現值：</label>
-	    <div class="col-sm-5">
-	      <input type="text" class="form-control" value="5000" id="current_value"/>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">使用年限(月)：</label>
-	    <div class="col-sm-5">
-	      <input type="text" class="form-control" value="36" id="expire_info"/>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label class="col-sm-3 control-label">備註：</label>
-	    <div class="col-sm-5">
-	      <textarea rows="2"  class="form-control" id="note"/>我真的花了錢買筆電啊~</textarea>
-	    </div>
-	  </div>
+	  <p><h3>確認是否刪除財產&nbsp;『<?php echo $value['name']?>』</h3></p>
       </div>
+      <input id="id" name="id" type="hidden" value="<?php echo $value['id']?>">
+      <input id="status" name="status" type="hidden" value="remove">
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn-success">送出修改</button>
+        <button type="submit" class="btn btn-danger">確認刪除</button>
       </div>
-        </form>
+      </form>
     </div>
   </div>
 </div>
-
--->
+<?php endforeach; ?>

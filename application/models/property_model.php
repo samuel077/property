@@ -11,7 +11,7 @@ class Property_model extends CI_Model {
         {
 		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name 
 			from property pr, location lo, property_type pt 
-			where pr.location_id = lo.id AND pr.property_type = pt.id";
+			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0";
 	
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -64,17 +64,27 @@ class Property_model extends CI_Model {
 	}
 
 	public function update_property_by_id(){
-		$data = array(
-			'name' => $this->input->post('name'), 
-			'serial_id' => $this->input->post('serial_id'), 
-			'purchase_date' => $this->input->post('purchase_date'), 
-			'expire_info' => $this->input->post('expire_info'), 
-			'brand' => $this->input->post('brand'), 
-			'location_id' => $this->input->post('location'), 
-			'present_value' => $this->input->post('currentValue'), 
-			'property_type' => $this->input->post('property_type'), 
-			'note' => $this->input->post('note') 
+		if($this->input->post('status') === 'remove')
+		{
+			$data = array(
+				'is_delete' => '1',
+				'delete_note' => date('Y-m-d H:i:s')
 			);
+		}
+		else
+		{
+			$data = array(
+				'name' => $this->input->post('name'), 
+				'serial_id' => $this->input->post('serial_id'), 
+				'purchase_date' => $this->input->post('purchase_date'), 
+				'expire_info' => $this->input->post('expire_info'), 
+				'brand' => $this->input->post('brand'), 
+				'location_id' => $this->input->post('location'), 
+				'present_value' => $this->input->post('currentValue'), 
+				'property_type' => $this->input->post('property_type'), 
+				'note' => $this->input->post('note') 
+			);
+		}
 		$this->db->where('id', $this->input->post('id'));
 		$this->db->update('property', $data);
 		// 有 update 成功，affected_rows() = 1
@@ -83,24 +93,6 @@ class Property_model extends CI_Model {
 		else
 			return FALSE;
 	}
-
-        // insert part.
-	/*
-        public function set_news()
-        {
-                $this->load->helper('url');
-
-                $slug = url_title($this->input->post('title'), 'dash', TRUE);
-
-                $data = array(
-                        'title' => $this->input->post('title'),
-                        'slug' => $slug,
-                        'text' => $this->input->post('text')
-                );
-
-                return $this->db->insert('news', $data);
-        }*/
-	
-	}
+}
 
 ?>
