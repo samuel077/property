@@ -68,15 +68,15 @@
 				<td colspan="2"><p></p></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input class="form-control" type="text" id=" "  name="" style="height:35px;width:327px;" placeholder="請輸入User ID"></input></td>
+				<td colspan="2"><input class="form-control" type="text" id=" "  name="" style="height:35px;width:300px;" placeholder="請輸入User ID"></input></td>
 				
 			</tr>
 			<tr>
 				<td><p></p></td>
 			</tr>
 			<tr>
-				<td><input type="password" id=" "  class="form-control" name="" style="height:35px;width:250px;" placeholder="password"></td>
-				<td><button type="button" class="btn btn-primary" style="width: 65px;"><b>登入</b></button></td>
+				<td><input type="password" id=" "  class="form-control" name="" style="height:35px;width:220px;" placeholder="password"></td>
+				<td><button type="button" class="btn btn-primary" style="width: 65px; margin-right:25px;"><b>登入</b></button></td>
 			</tr>
 			<tr><td><p></p></td></tr>
 			<!--
@@ -85,19 +85,19 @@
 			</tr>-->
 			</table>
 			</div>
-				<div class="row" style="height:350px; width:350px; background-color:white; 
+			<div class="row" style="height:240px; width:350px; background-color:white; 
 						margin-top:15px; border-radius:5px;">
 				<div style="margin-left:16px; margin-top:25px;">
 					<h4><b>First time here?</b></h4>
 				</div>
 				<input type="text" class="form-control" name="account" placeholder="Please type Account"
-				style="width:250px; margin-left:10px;"/>
+				style="width:300px; margin-left:10px; margin-top:15px;"/>
 				<input type="password" class="form-control" name="pw" placeholder="Please type Password" 
-				style="width:250px; margin-left:10px; margin-top:10px;"/>
+				style="width:300px; margin-left:10px; margin-top:10px;"/>
 				<input type="password" class="form-control" name="pwconfirm" placeholder="Confirm Password Again" 
-				style="width:250px; margin-left:10px; margin-top:10px;"/>
+				style="width:300px; margin-left:10px; margin-top:10px;"/>
 
-				<button type="button" class="btn btn-success" style="width: 65px; margin-left:195px; margin-top:10px;"><b>註冊</b></button>
+				<button type="button" class="btn btn-success" style="width: 65px; margin-left:245px; margin-top:10px;"><b>註冊</b></button>
 			</div>
 		</div>
 	</div>
