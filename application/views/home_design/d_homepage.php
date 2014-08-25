@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="item">
-      <img src="http://140.123.105.16/~tutu/property/public/image/fruits.JPG">
+      <img src="http://140.123.105.16/~tutu/property/public/image/wallet.JPG">
       <div class="carousel-caption">       
       </div>
     </div>
@@ -47,43 +47,57 @@
 	style="
         width:850px; height:550px;
         position:relative;z-index:1;
-        margin: auto;margin-top: -780px;">
+        margin: auto;margin-top: -740px; align:center; font-family:Microsoft JhengHei;">
 		<div id="div1" class="col-md-6" style="color:white; width:500px; height:630px;">
 
-		<h1>HSNG 財產管理系統。</h1>
+		<h1><b>HSNG 財產管理系統</b></h1>
 		<br>
 		<h4>
 			<p>確實登錄實驗室財產資訊，可以讓每年度的盤點更輕鬆唷</p>
-			<p>山妙副總好有錢~大家快跟他借$___$</p>
+			<p>山妙副總好有錢~大家快跟他要$___$</p>
 		</h4> 
 		</div>
 		<div id="div2" class="col-md-6" style="width:350px; height:630px;">
-			<div class="row" style="background-color:white; border-radius:20px; height:250px; width:350px;">
-			<table  style="width:330px; margin:auto; margin-top: 20px;" >
+			<div class="row" style="background-color:white; border-radius:5px; height:170px; width:350px;">
+			<table  style="width:330px; margin:auto; margin-top: 10px;" >
 			<tr>	
-				<td colspan="2"><strong><h3>&nbsp Login</h3></strong></td>
+				<td colspan="2"><h4><b>&nbsp Login</b></h4>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><hr></td>
+				<td colspan="2"><p></p></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" id=" "  name="" style="height:35px;width:235px;" placeholder="userid"></input></td>
+				<td colspan="2"><input class="form-control" type="text" id=" "  name="" style="height:35px;width:327px;" placeholder="請輸入User ID"></input></td>
 				
 			</tr>
 			<tr>
 				<td><p></p></td>
 			</tr>
 			<tr>
-				<td><input type="textbox" id=" "  name="" style="height:35px;width:235px;" placeholder="password"></td>	
-				<td><button type="button" class="btn btn-primary" style="width: 65px;">登入</button></td>
+				<td><input type="password" id=" "  class="form-control" name="" style="height:35px;width:250px;" placeholder="password"></td>
+				<td><button type="button" class="btn btn-primary" style="width: 65px;"><b>登入</b></button></td>
 			</tr>
 			<tr><td><p></p></td></tr>
+			<!--
 			<tr>
 				<td><a href="#" target="">sign up</a></td>
-			</tr>
+			</tr>-->
 			</table>
 			</div>
-			<div class="row" style="height:350px; width:350px;">
+				<div class="row" style="height:350px; width:350px; background-color:white; 
+						margin-top:15px; border-radius:5px;">
+				<div style="margin-left:16px; margin-top:25px;">
+					<h4><b>First time here?</b></h4>
+				</div>
+				<input type="text" class="form-control" name="account" placeholder="Please type Account"
+				style="width:250px; margin-left:10px;"/>
+				<input type="password" class="form-control" name="pw" placeholder="Please type Password" 
+				style="width:250px; margin-left:10px; margin-top:10px;"/>
+				<input type="password" class="form-control" name="pwconfirm" placeholder="Confirm Password Again" 
+				style="width:250px; margin-left:10px; margin-top:10px;"/>
+
+				<button type="button" class="btn btn-success" style="width: 65px; margin-left:195px; margin-top:10px;"><b>註冊</b></button>
 			</div>
 		</div>
 	</div>
