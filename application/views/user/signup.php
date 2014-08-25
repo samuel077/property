@@ -1,10 +1,7 @@
-<?php
-    echo vaildation_error();
-?>
-
-<?php
-    echo from_open('users/signup');
-?>
+<?php 
+    $attributes = array('class' => 'form-horizontal col-sm-offset-2' , 'role' => 'form');
+    echo form_open('user/signup' , $attributes); 
+?> 
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者帳號</label>
             <div class = "col-sm-4">
@@ -52,14 +49,15 @@
             <label class = "col-sm-2 control-label">使用者身份</label>
             <div class = "col-sm-4">
                 <select class = "form-control" name = "identity_type">
-                    <?php for ($i = 0 ;$i < count($type)-1 ;$i++):
-                        if($i = 0)
-                            echo '<option value ='.$i.' selected = "selected" >';
-                        else 
-                            echo '<option value ='.$i.' >';
-                        echo $type[$i];
-                        echo '</option>';
-                    ?>
+                    <option value ="1" selected = "selected" >
+                        大學部
+                    </option>
+                    <option value ="2" >
+                        研究所
+                    </option>
+                    <option value ="3" >
+                        博士班
+                    </option>
                 </select>
             </div>
         </div>
@@ -69,6 +67,4 @@
                 <button type = "submet" id = "send_btn" class = "btn btn-default">確定</button>
             </div>
         </div>
-    </div>
-</form>
-
+<?php echo form_close(); ?>
