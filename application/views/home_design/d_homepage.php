@@ -1,22 +1,3 @@
-<html>
-<head>
-        <meta charset="utf-8">
-        <title>HSNG 財產管理平台</title>
-        <link rel="stylesheet" href="http://140.123.105.16/~tutu/property/public/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://140.123.105.16/~tutu/property/public/css/navbar.css">
-        <!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
-        <script src="http://140.123.105.16/~tutu/property/public/js/jquery-1.11.1.min.js"></script>
-        <script src="http://140.123.105.16/~tutu/property/public/js/bootstrap.js"></script>
-	<!--    <link rel="stylesheet" href="http://140.123.105.16/~tutu/property/public/css/bootstrap-responsive.min.css"> -->
-</head>
-<body>
-</body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-		<a class="navbar-brand" href="#">HSNG(ANT)</a>
-		<p class="navbar-text navbar-right">Porperty Management System</p>
-	</div>
-</nav>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="position:relative;z-index:-1;">
   <!-- Indicators -->
   <!--
@@ -107,12 +88,3 @@
 		</div>
 	</div>
 </div>
-
-</div> <!-- end of fixed container -->
-<p style="text-align:center; position:relative;z-index:1;margin: auto;margin-top: -40px;">
-<strong >2014 &nbsp; &copy; HSNG(ANT)財產管理網頁 &nbsp;<br/>
-designed by : hungo, tutu, Samuel </strong></p>
-</p>
-</div>
-</body>
-</html>
