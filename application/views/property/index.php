@@ -22,14 +22,14 @@
 			<td><?php echo $value['name'];?></td>
 			<td><?php echo $value['brand'];?></td>
 			<td><?php echo $value['location_name'];?></td>
-			<td><button type="button" class="btn btn-info" data-target="#modal<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
+			<td><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
 			<td><button type="button" class="btn btn-primary">申請借用</button></td>
 			<?php if(isset($is_admin)) : ?>
 				<?php if($is_admin) :?>
 				<td> 
 					<button type="button" class="btn btn-warning" data-target="#update<?php echo $value['serial_id']?>" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
 					&nbsp;
-					<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+					<button type="submit" class="btn btn-danger" onclick="window.localtion.href='<?=base_url("/property/remove/".$value['id'])?>'"><span class="glyphicon glyphicon-trash"></span></button>
 				</td>
 				<?php endif; ?>
 			<?php endif; ?>
@@ -40,7 +40,7 @@
 
 
 <?php foreach($propertyList as $list => $value) :?>
-<div class="modal fade" id="modal<?php echo $value['serial_id']?>" style="align:center; font-family:Microsoft JhengHei;">
+<div class="modal fade" id="info<?php echo $value['serial_id']?>" style="align:center; font-family:Microsoft JhengHei;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

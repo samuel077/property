@@ -28,7 +28,7 @@ class Property extends CI_Controller {
         }
 
 	public function update(){
-		
+		// update 完之後 跳/property 資料夾	
 		$data['updateSuccess'] = $this->property_model->update_property_by_id();
 		redirect('/property', 'refresh');
 	}	
@@ -69,8 +69,13 @@ class Property extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
         }
-
+	
+	// actually this is not a real remove. we simply set is delete as true;
         public function remove($propertyId) {
+	
+		// we need to check is admin trigger this action or not.
+
+		die("got you");
 		
 		$data['propertyId'] = $propertyId;		
 		$data['title'] = "財產管理平台 移除財產";		
