@@ -3,7 +3,7 @@
 class Property extends CI_Controller {
 
 	public $data;
-
+	public $perpage = 8;
 	public function __construct(){
                 parent::__construct();
                 session_start();
@@ -11,20 +11,18 @@ class Property extends CI_Controller {
         }
 	
         public function index()
-        {
-		$data['title'] = "HSNG 財產管理平台";
-		$data['propertyList'] = $this->property_model->get_property();
-		$data['pageHeaderBig'] = "財產列表";
-		$data['pageHeaderSmall'] = "全部列表";
-		$data['session'] = $_SESSION;
-		$data['is_admin'] = true;
-		$data['property_type_list'] = $this->property_model->get_propertyType();
-		$data['location_list'] = $this->property_model->get_location();
-
-
-		$this->load->view('templates/header', $data);
-                $this->load->view('property/index', $data);
-                $this->load->view('templates/footer');
+        {	
+		
+		//echo "<pre>";
+                //print_r($_POST);
+                //echo "</pre>";
+		//die("1234");		
+                // 沒有被設定過
+                if(isset($_POST['offset'])){
+                        $this->topage($_POST['offset']);
+                }
+                else
+                        $this->topage(0);
         }
 
 	public function update(){
@@ -90,4 +88,94 @@ class Property extends CI_Controller {
 		return false;
 	}
 
+        public function topage($offset){
+                //echo "<pre>";
+                //print_r($offset);
+                //echo "</pre>";
+                /* pagination part */
+                $this->load->library('pagination');
+                $config = $this->setPageInfo($offset, "");
+		/*
+                echo "<pre>";
+                print_r($config);
+                echo "</pre>";
+		*/
+		$this->pagination->initialize($config);
+                $data['pagination'] = $this->pagination->create_links();
+		$data['totalRows'] = $config['total_rows'];
+	
+		// 計算第幾筆資料到第幾筆資料
+		if($offset == 0){
+			$data['rowFrom'] = 1;
+		}
+		else{
+			$data['rowFrom'] = $offset + 1;
+		}
+
+		if($data['totalRows'] >= $data['rowFrom'] + $config['per_page']){
+			//echo "total rows > rowFrom + perpage";
+			$data['rowTo'] = $data['rowFrom'] + $config['per_page'] - 1;
+		}
+		else{
+			//echo "total rows <= rowfrom + perpage";
+			$data['rowTo'] = $data['totalRows'];
+		}
+		/*
+		echo "<pre>";	
+		print_r($data);
+		echo "</pre>";	
+		*/
+		//echo $data['pagination'];
+
+                $data['title'] = "HSNG 財產管理平台";
+                $data['propertyList'] = $this->property_model->get_property($offset, $this->perpage);
+                $data['pageHeaderBig'] = "財產列表";
+                $data['pageHeaderSmall'] = "全部列表";
+                $data['session'] = $_SESSION;
+                $data['is_admin'] = true;
+                $data['property_type_list'] = $this->property_model->get_propertyType();
+                $data['location_list'] = $this->property_model->get_location();
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('property/index', $data);
+                $this->load->view('templates/footer');
+        }
+
+	private function setPageInfo($offset, $searchTerm){
+
+                $this->load->library('pagination');
+                $config['base_url'] = '/property/page/';
+                $config['total_rows'] = $this->property_model->getPropertyCountBySearchTerm($searchTerm);
+		//echo "total rows".$config['total_rows'];
+
+                $config['per_page'] = $this->perpage;
+                $config['cur_page'] = $offset;
+		
+		$config['full_tag_open'] = "<ul class='pagination pagination-sm pull-right' style='margin-right:20px;'>";
+                $config['full_tag_close'] = "</ul>";
+                // first link
+                $config['first_link'] = '&laquo;';
+                $config['first_tag_open'] = '<li class="prev page">';
+                $config['first_tag_close'] = '</li>';
+                // last link
+                $config['last_link'] = '&raquo;';
+                $config['last_tag_open'] = '<li class="next page">';
+                $config['last_tag_close'] = '</li>';
+                // next link
+                $config['next_link'] = '>';
+                $config['next_tag_open'] = '<li class="next page">';
+                $config['next_tag_close'] = '</li>';
+                // prev link
+                $config['prev_link'] = '<';
+                $config['prev_tag_open'] = '<li class="prev page">';
+                $config['prev_tag_close'] = '</li>';
+                // current link
+                $config['cur_tag_open'] = '<li class="active"><a>';
+                $config['cur_tag_close'] = '</a></li>';
+                $config['display_pages'] = TRUE;
+
+                $config['num_tag_open'] = '<li class="page">';
+                $config['num_tag_close'] = '</li>';
+                return $config;
+        }
 }

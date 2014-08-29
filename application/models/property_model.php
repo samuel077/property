@@ -7,11 +7,11 @@ class Property_model extends CI_Model {
                 $this->load->database();
         }
 
-        public function get_property($propertyId = FALSE)
+        public function get_property($offset, $limit)
         {
 		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name 
 			from property pr, location lo, property_type pt 
-			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0";
+			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0 LIMIT $offset, $limit";
 	
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -43,6 +43,19 @@ class Property_model extends CI_Model {
 		
 	}
 
+	public function getPropertyCountBySearchTerm($searchTerm){
+                if($searchTerm == ""){
+                        $sql = "SELECT count(*) as count from property WHERE 1";
+                }
+                else{
+                        //$sql = "SELECT count(*) from property WHERE name is LIKE %".$searchTerm."%;
+                        $sql = "SELECT count(*) as count from property WHERE 1";
+                }
+                $query = $this->db->query($sql);
+		$a = $query->result_array();
+
+                return $a[0]['count'];
+        }
 	
 	public function set_property(){
 		// 使用 post 的資料來 set 資料庫
@@ -56,7 +69,7 @@ class Property_model extends CI_Model {
 			'expire_info' => $this->input->post('expire_info'),
 			'brand' => $this->input->post('brand'),
 			'location_id' => $this->input->post('location'),
-			'present_value' => $this->input->post('currentValue'),
+			'origin_value' => $this->input->post('currentValue'),
 			'property_type' => $this->input->post('property_type'),
 			'note' => $this->input->post('note')
 		);
@@ -80,7 +93,7 @@ class Property_model extends CI_Model {
 				'expire_info' => $this->input->post('expire_info'), 
 				'brand' => $this->input->post('brand'), 
 				'location_id' => $this->input->post('location'), 
-				'present_value' => $this->input->post('currentValue'), 
+				'origin_value' => $this->input->post('currentValue'), 
 				'property_type' => $this->input->post('property_type'), 
 				'note' => $this->input->post('note') 
 			);

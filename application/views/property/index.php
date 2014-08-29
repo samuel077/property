@@ -1,4 +1,42 @@
 <div style="width:97%; margin:0 auto;">
+	<!-- the script is used for add a click for pagination icon -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>
+        $(document).ready(function(){
+                $('#pagination a').bind('click', function() {
+                        var url = $(this).attr('href');
+                        pageno = ((matchs = url.match(/(\d+)$/))!= undefined) ? matchs[0] : 0;
+                        $('#offset').attr('value', pageno);
+                        $('#search').submit();
+                        return false;
+                        });
+        });
+	</script>	
+	<form id="search" role="form" method="post" action="<?=base_url("/property/index")?>">
+          <div class="row">
+            <div class="col-md-6">
+              <p style="margin-top:25px;">顯示<?php echo $totalRows;?>筆資料中 第 <?php echo $rowFrom?> 到 第 <?php echo $rowTo;?> 筆 資料</p>
+            </div>
+            <div class="col-md-6">
+	      <input type="hidden" id="offset" name="offset"/>
+	      <!--<input type="text" id="searcterm" name="searchterm"/ placeholder="輸入關鍵字搜尋">-->
+              <div class="row" id="pagination">
+                <?php echo $pagination;?>
+                <!--
+                <ul class="pagination pagination-sm pull-right" style="margin-right:20px;">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+                </ul>
+                -->
+              </div>
+            </div>
+          </div>
+        </form>
 	<!-- add a list page -->
 	<table class="table table-striped" style="align:center; font-family:Microsoft JhengHei;">
 	<thead> 
@@ -92,9 +130,9 @@
 	    </div>
 	  </div>
 	  <div class="form-group">
-	    <label class="col-sm-3 control-label">財產現值：</label>
+	    <label class="col-sm-3 control-label">財產原始價值：</label>
 	    <div class="col-sm-5">
-	      <p class="form-control-static"><?php echo $value['present_value']?></p>
+	      <p class="form-control-static"><?php echo $value['origin_value']?></p>
 	    </div>
 	  </div>
 	  <div class="form-group">
@@ -181,9 +219,9 @@
 	    </div>
 	  </div>
 	  <div class="form-group">
-	    <label class="col-sm-3 control-label">財產現值：</label>
+	    <label class="col-sm-3 control-label">財產原始價值：</label>
 	    <div class="col-sm-5">
-	      <input type="text" class="form-control" id="current_value" name="current_value" value="<?php echo $value['present_value']?>" />
+	      <input type="text" class="form-control" id="current_value" name="current_value" value="<?php echo $value['origin_value']?>" />
 	    </div>
 	  </div>
 	  <div class="form-group">
