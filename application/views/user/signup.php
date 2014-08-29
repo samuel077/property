@@ -5,44 +5,44 @@
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者帳號</label>
             <div class = "col-sm-4">
-                <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號">
+                <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value ="<?php echo $_POST['account'];?>" />
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者密碼</label>
             <div class = "col-sm-4">
-                <input name = "passwd" type = "password" class = "form-control" placeholder = "請輸入使用者密碼">
+                <input name = "passwd" type = "password" class = "form-control" placeholder = "請輸入使用者密碼" value ="<?php echo $_POST['pw'];?>"/>
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">確認使用者密碼</label>
             <div class = "col-sm-4">
-                <input name = "repasswd" type = "password" class = "form-control" placeholder = "請再次輸入使用者密碼">
+                <input name = "repasswd" type = "password" class = "form-control" placeholder = "請再次輸入使用者密碼" />
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者姓名</label>
             <div class = "col-sm-4">
-                <input name = "name" type = "text" class = "form-control" placeholder = "請輸入使用者姓名">
+                <input name = "name" type = "text" class = "form-control" placeholder = "請輸入使用者姓名" value="<?php echo $_POST['name']; ?>"/>
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者學號</label>
             <div class = "col-sm-4">
-                <input name = "school_id" type = "text" class = "form-control" placeholder = "請輸入使用者學號">
+                <input name = "school_id" type = "text" class = "form-control" placeholder = "請輸入使用者學號" />
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者E-mail</label>
             <div class = "col-sm-4">
-                <input name = "email" type = "text" class = "form-control" placeholder = "請輸入使用者E-mail">
+                <input name = "email" type = "text" class = "form-control" placeholder = "請輸入使用者E-mail" />
             </div>
         </div>
 
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者入學年</label>
             <div class = "col-sm-4">
-                <input name = "enroll_year" type = "text" class = "form-control" placeholder = "請輸入使用者入學年">
+                <input name = "enroll_year" type = "text" class = "form-control" placeholder = "請輸入使用者入學年" />
             </div>
         </div>
         <div class = "form-group">

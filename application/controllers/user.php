@@ -32,7 +32,6 @@ Class User extends CI_Controller {
 
         public function signup()
         {
-
             $this->load->helper('form');
             $this->load->library('form_validation');
 
