@@ -12,8 +12,22 @@ class Property_model extends CI_Model {
 		//echo "message from property_mode, searchterm = ".$searchterm."<br/>";
 		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name 
 			from property pr, location lo, property_type pt 
-			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0 LIMIT $offset, $limit";
-//		echo "sql = ".$sql;	
+			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0"; /* LIMIT $offset, $limit";*/
+		if($searchterm != ""){
+			$sql .= " AND (
+					pr.name LIKE '%$searchterm%'
+					OR pr.brand LIKE '%$searchterm%'
+					OR lo.name LIKE '%$searchterm%'
+					OR pt.name LIKE '%$searchterm%'
+				)";
+			// date 的部份還暫時有問題，先不加，要把date的格式變成String 才有辦法使用LIKE
+			//OR pr.purchase_date LIKE '%$searchterm%'
+			// 有了 searchterm offset 就不重要了，這裡先歸0，limit 還是照舊不變
+			$offset = 0;
+		}
+		
+		$sql .= " LIMIT $offset, $limit";	
+		//echo "sql = ".$sql;	
 		$query = $this->db->query($sql);
 		return $query->result_array();
  		/*               
@@ -44,18 +58,34 @@ class Property_model extends CI_Model {
 		
 	}
 
-	public function getPropertyCountBySearchTerm($searchTerm){
-                if($searchTerm == ""){
+	public function getPropertyCountBySearchTerm($searchterm){
+                if($searchterm == ""){
                         $sql = "SELECT count(*) as count from property WHERE 1";
+			$query = $this->db->query($sql);
+			$a = $query->result_array();
+
+			return $a[0]['count'];
                 }
                 else{
-                        //$sql = "SELECT count(*) from property WHERE name is LIKE %".$searchTerm."%;
-                        $sql = "SELECT count(*) as count from property WHERE 1";
-                }
-                $query = $this->db->query($sql);
-		$a = $query->result_array();
-
-                return $a[0]['count'];
+			//echo "message from property_mode, searchterm = ".$searchterm."<br/>";
+			$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name
+				from property pr, location lo, property_type pt
+				where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0"; /* LIMIT $offset, $limit";*/
+				if($searchterm != ""){
+					$sql .= " AND (
+						pr.name LIKE '%$searchterm%'
+						OR pr.brand LIKE '%$searchterm%'
+						OR lo.name LIKE '%$searchterm%'
+						OR pt.name LIKE '%$searchterm%'
+						)";
+					// date 的部份還暫時有問題，先不加，要把date的格式變成String 才有辦法使用LIKE
+					//OR pr.purchase_date LIKE '%$searchterm%'
+					// 有了 searchterm offset 就不重要了，這裡先歸0，limit 還是照舊不變
+					$offset = 0;
+				}
+			$query = $this->db->query($sql);
+			return $query->num_rows;
+		}
         }
 	
 	public function set_property(){

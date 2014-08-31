@@ -22,8 +22,12 @@ class Property extends CI_Controller {
                         $this->topage($_POST['offset'],"");
                 }
                 else{
-			// 使用者有輸入搜尋字串
-                        	$this->topage(0, $_POST['searchterm']);
+				if(isset($_POST['searchterm'])){
+					// 使用者有輸入搜尋字串
+                        		$this->topage(0, $_POST['searchterm']);
+				}else{
+					$this->topage(0,"");
+				}
 		}
         }
 
@@ -91,13 +95,13 @@ class Property extends CI_Controller {
 	}
 
         public function topage($offset,$searchterm){
-		echo "offset = ".$offset;
+		//echo "offset = ".$offset;
                 //echo "<pre>";
                 //print_r($offset);
                 //echo "</pre>";
                 /* pagination part */
                 $this->load->library('pagination');
-                $config = $this->setPageInfo($offset, "");
+                $config = $this->setPageInfo($offset, $searchterm);
 		/*
                 echo "<pre>";
                 print_r($config);
