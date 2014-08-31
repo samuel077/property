@@ -7,12 +7,13 @@ class Property_model extends CI_Model {
                 $this->load->database();
         }
 
-        public function get_property($offset, $limit)
+        public function get_property($offset, $limit, $searchterm)
         {
+		//echo "message from property_mode, searchterm = ".$searchterm."<br/>";
 		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name 
 			from property pr, location lo, property_type pt 
 			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0 LIMIT $offset, $limit";
-	
+//		echo "sql = ".$sql;	
 		$query = $this->db->query($sql);
 		return $query->result_array();
  		/*               

@@ -18,11 +18,13 @@ class Property extends CI_Controller {
                 //echo "</pre>";
 		//die("1234");		
                 // 沒有被設定過
-                if(isset($_POST['offset'])){
-                        $this->topage($_POST['offset']);
+                if(isset($_POST['offset']) && $_POST['offset'] != ""){
+                        $this->topage($_POST['offset'],"");
                 }
-                else
-                        $this->topage(0);
+                else{
+			// 使用者有輸入搜尋字串
+                        	$this->topage(0, $_POST['searchterm']);
+		}
         }
 
 	public function update(){
@@ -88,7 +90,8 @@ class Property extends CI_Controller {
 		return false;
 	}
 
-        public function topage($offset){
+        public function topage($offset,$searchterm){
+		echo "offset = ".$offset;
                 //echo "<pre>";
                 //print_r($offset);
                 //echo "</pre>";
@@ -128,7 +131,7 @@ class Property extends CI_Controller {
 		//echo $data['pagination'];
 
                 $data['title'] = "HSNG 財產管理平台";
-                $data['propertyList'] = $this->property_model->get_property($offset, $this->perpage);
+                $data['propertyList'] = $this->property_model->get_property($offset, $this->perpage, $searchterm);
                 $data['pageHeaderBig'] = "財產列表";
                 $data['pageHeaderSmall'] = "全部列表";
                 $data['session'] = $_SESSION;
