@@ -3,7 +3,7 @@
 class Property extends CI_Controller {
 
 	public $data;
-	public $perpage = 8;
+	public $perpage = 3;
 	public function __construct(){
                 parent::__construct();
                 session_start();
