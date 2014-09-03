@@ -22,12 +22,13 @@
 	      <!--<input type="text" id="searcterm" name="searchterm"/ placeholder="輸入關鍵字搜尋">-->
               <div class="row" id="pagination">
               <?php echo $pagination;?>
+	      <!--
 	      <div class="input-group input-group-sm" style="margin-top:20px; margin-left:180px;">
 	        <span class="input-group-btn">
 		  <button class="btn btn-default" type="submit">搜尋</button>
 		</span>
 		<input type="text" id="searchterm" name="searchterm" class="form-control" placeholder="輸入關鍵字搜尋財產" style="width:140px;">
-	      </div><!-- /input-group -->
+	      </div>--><!-- /input-group -->
 		<!--
 		<input type="text" placeholder="輸入關鍵字搜尋" class="pull-right form-control" style="margin-top:22px; width:150px; margin-right:10px;"/>
 		<button class="btn btn-default btn-sm pull-right"type="submit" style="margin-top:18px; margin-right:10px;">送出查詢</button>
