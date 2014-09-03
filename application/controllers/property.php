@@ -18,6 +18,9 @@ class Property extends CI_Controller {
                 //echo "</pre>";
 		//die("1234");		
                 // 沒有被設定過
+//		echo "<pre>";
+//		print_r($_SESSION);
+//		echo "</pre>";
                 if(isset($_POST['offset']) && $_POST['offset'] != ""){
                         $this->topage($_POST['offset'],"");
                 }
@@ -140,6 +143,7 @@ class Property extends CI_Controller {
                 $data['pageHeaderSmall'] = "全部列表";
                 $data['session'] = $_SESSION;
                 $data['is_admin'] = true;
+                $data['user_name'] = "管理者";
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
 

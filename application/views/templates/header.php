@@ -19,17 +19,24 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">實驗室財產<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?=base_url("/property/")?>">財產列表(借用)</a></li>
+                <li><a href="<?=base_url("/property/")?>"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;財產列表(借用)</a></li>
+		<!--
 		<li class="divider"></li>
                 <li><a href="#">年度可報廢財產</a></li>
+		-->
               </ul>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">使用者<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">個人資料</a></li>
-		<li class="divider"></li>
-                <li><a href="#">財產借用列表</a></li>
+		<?php if(isset($is_admin)) : ?>
+			<?php if($is_admin) : ?>
+                		<li><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;會員列表</a></li>
+			<?php else : ?>
+                		<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;個人資料(待討論)</a></li>
+                		<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;財產借用列表</a></li>
+			<?php endif; ?>
+		<?php endif; ?>
               </ul>
           </li>
 	  <?php if(isset($is_admin)) : ?>
@@ -37,21 +44,35 @@
 	  <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理者專區<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">使用者匯入/匯出</a></li>
+                <li><a href="<?=base_url("/property/create")?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;財產單筆新建</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-import"></span>&nbsp;&nbsp;財產匯入</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;依地區列出財產</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-remove-sign" style="color:red;"></span>&nbsp;&nbsp;可報廢財產列表</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;年度清點財產結果</a></li>
 		<li class="divider"></li>
-                <li><a href="<?=base_url("/property/create")?>">財產單筆新建</a></li>
-		<li class="divider"></li>
-                <li><a href="#">財產匯入/匯出</a></li>
-		<li class="divider"></li>
-                <li><a href="#">危險財產清單</a></li>
+                <!-- <li><a href="#">危險財產清單</a></li>-->
+                <li><a href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;新建使用者</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;審核使用者頁面</a></li>
               </ul>
           </li>
 	  	<? endif; ?>
 	  <? endif; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-	  <li> <a href="#">註冊</a></li>
-	  <li> <a href="#">登入/登出</a></li>
+		<?php if(isset($user_name)) : ?>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user_name;?><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu" style="width:50px;">
+                <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;設定</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;登出</a></li>
+              </ul>
+          </li>
+          <? endif; ?>
+		<!--
+		<?php if(isset($user_name)) : ?>
+	  		<li> <a href="#"><?php echo $user_name;?></a></li>
+		<?php endif; ?>
+		-->
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
