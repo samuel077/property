@@ -173,7 +173,7 @@
 <div class="modal fade" id="update<?php echo $value['serial_id']?>" style="align:center; font-family:Microsoft JhengHei;">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" role="form" action="./property/update/" method="post">
+      <form class="form-horizontal" role="form" action="<?=base_url("/property/update")?>" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title"><span class="glyphicon glyphicon-list"></span> &nbsp; <b>財產詳細資訊</b></h4>

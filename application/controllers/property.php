@@ -48,7 +48,15 @@ class Property extends CI_Controller {
 		$data['pageHeaderSmall'] = "手動輸入";	
 		$data['property_type_list'] = $this->property_model->get_propertyType();	
 		$data['location_list'] = $this->property_model->get_location();
-		$data['is_admin'] = true;	
+
+                $data['session'] = $_SESSION;
+                if($_SESSION['hsng_role_id'] == 1){
+                        $data['is_admin'] = true;
+                }else{
+                        $data['is_admin'] = false;
+                }
+                $data['user_name'] = $_SESSION['username'];
+	
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -71,9 +79,7 @@ class Property extends CI_Controller {
 			// 驗証成功，寫到資料庫
 			// 導入成功頁面，可以跑alert();
 			$this->property_model->set_property();
-			$this->load->view('templates/header', $data);
-			$this->load->view('property/createSuccessfully', $data);
-			$this->load->view('templates/footer');
+			redirect("/property/index", 'refresh');
 		}
         }
 

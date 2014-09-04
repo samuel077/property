@@ -59,7 +59,7 @@ Class User extends CI_Controller {
                     $this->load->view('templates/header', $data);
                     $this->load->view('property/index');
                     $this->load->view('templates/footer');
-*/
+		 */
                 }
                 else if($result->hsng_role_id == 2)
                 {
@@ -72,6 +72,14 @@ Class User extends CI_Controller {
             }
 
         }
+
+	// modify by Samuel @ 2014/09/05
+	public function logout(){
+		// 清空 session，然後回到首頁
+		session_unset();
+		session_destroy();
+		redirect('/', 'refresh');
+	}
 
         public function signup()
         {

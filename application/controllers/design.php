@@ -9,14 +9,18 @@ class Design extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = "HSNG 財產管理平台";
-		$_SESSION['username'] = "s750716@gmail.com";
-		$_SESSION['userRole'] = "admin";
-		$data['session'] = $_SESSION;
+		if(isset($_SESSION['username']))
+			redirect('/property/', 'refresh');
+		else{
+	                $data['title'] = "HSNG 財產管理平台";
+	                //$_SESSION['username'] = "s750716@gmail.com";
+       	         	//$_SESSION['userRole'] = "admin";
+			//$data['session'] = $_SESSION;
 
-                $this->load->view('home_design/design_header.php', $data);
-                $this->load->view('home_design/d_homepage.php', $data);
-                $this->load->view('home_design/d_footer.php');
+			$this->load->view('home_design/design_header.php', $data);
+			$this->load->view('home_design/d_homepage.php', $data);
+			$this->load->view('home_design/d_footer.php');
+		}
 	}
 
 	public function test($param) {
