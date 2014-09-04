@@ -6,6 +6,7 @@ Class User extends CI_Controller {
         public function __construct()
         {
             parent::__construct();
+	    session_start();
             $this->load->model('user_model');
         }
         
@@ -46,11 +47,19 @@ Class User extends CI_Controller {
             }
             else
             {
+		// admin = 1
                 if($result->hsng_role_id == 1)
                 {
+		    echo "in here";
+		    $_SESSION['username'] = $result->name;
+		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
+
+		    redirect('/property/index', 'refresh');	
+		/*
                     $this->load->view('templates/header', $data);
                     $this->load->view('property/index');
                     $this->load->view('templates/footer');
+*/
                 }
                 else if($result->hsng_role_id == 2)
                 {
