@@ -1,30 +1,25 @@
 <?php
     echo validation_errors();
+    
     $attributes = array('class' => 'form-horizontal col-sm-offset-2' , 'role' => 'form');
     echo form_open('./user/signup' , $attributes); 
 ?> 
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者帳號</label>
             <div class = "col-sm-4">
-                <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value ="" />
+            <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value ="<?php echo set_value('account',$account); ?>" />
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者密碼</label>
             <div class = "col-sm-4">
-                <input name = "passwd" type = "password" class = "form-control" placeholder = "請輸入使用者密碼" value =""/>
-            </div>
-        </div>
-        <div class = "form-group">
-            <label class = "col-sm-2 control-label">確認使用者密碼</label>
-            <div class = "col-sm-4">
-                <input name = "repasswd" type = "password" class = "form-control" placeholder = "請再次輸入使用者密碼" />
+            <input name = "passwd" type = "password" class = "form-control" placeholder = "請輸入使用者密碼" value ="<?php echo set_value('password',$passwd); ?>"/>
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者姓名</label>
             <div class = "col-sm-4">
-                <input name = "name" type = "text" class = "form-control" placeholder = "請輸入使用者姓名" value=""/>
+            <input name = "name" type = "text" class = "form-control" placeholder = "請輸入使用者姓名" value="<?php echo set_value('name',$name); ?>"/>
             </div>
         </div>
         <div class = "form-group">
@@ -68,5 +63,5 @@
                 </select>
             </div>
         </div>
-        <input type = "submit" id = "send_btn" class = "btn btn-default" value="確定"/>
+        <input type = "submit" name = "send_btn" class = "btn btn-default" value="確定"/>
 <?php echo form_close(); ?>

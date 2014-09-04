@@ -4,6 +4,7 @@ class User_model extends CI_Model {
     function __construct()
     {
         parent::__construct();
+        $this->load->database();
     }
     
     function add_user()
@@ -13,6 +14,7 @@ class User_model extends CI_Model {
         $default_account_status = 1;
         $enroll_year = intval($this->input->post('enroll_year'));
         $identity_type = intval($this->input->post('identity_type'));
+
         switch($identity_type)
         {
             case 1:
@@ -30,7 +32,7 @@ class User_model extends CI_Model {
             'name' => $this->input->post('name'),
             'school_id' => $this->input->post('school_id'),
             'account' => $this->input->post('account'),
-            'password' => $this->input->post('passwd'),
+            'password' => md5($this->input->post('passwd')),
             'phone_number' => $this->input->post('phone_number'),
             'email' => $this->input->post('email'),
             'hsng_role_id' => $default_hsng_role,
@@ -43,7 +45,27 @@ class User_model extends CI_Model {
 
         $this->db->insert('user',$data);
     } 
-        
+    
+    function login_check($account,$passwd)    
+    {
+ 
+        $this->db->select('name,hsng_role_id,account_status_id');
+        $this->db->from('user');
+        $this->db->where('account',$account);
+        $this->db->where('password',$passwd);
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1)
+        {
+            return $query->row();
+        }
+        else
+        {
+            return false;
+        }
+    }
 } 
 
 ?>

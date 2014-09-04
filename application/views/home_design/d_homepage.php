@@ -18,11 +18,13 @@
 				<div style="margin-left:16px; margin-top:5%;">
 					<h4><b>Login</b></h4>
 				</div>
-				<input  type="text" class="form-control"  name="user_id" style="width:300px; margin-left:15px; margin-top:15px;" placeholder="Please type User ID" />
+                <form method = "post" action = "user/login">
+				<input  type="text" class="form-control"  name="login_account" style="width:300px; margin-left:15px; margin-top:15px;" placeholder="Please type User ID" />
 				<table  style=" margin:auto; margin-top: 10px;" >
 					<tr>
-						<td><input type="password" id=" "  class="form-control" name="" style="height:35px;width:225px;" placeholder="password" /></td>
-						<td><button type="button" class="btn btn-primary" style="width: 65px; margin-left: 10px;"><b>登入</b></button></td>
+						<td><input type="password" id=" "  class="form-control" name="login_passwd" style="height:35px;width:225px;" placeholder="password" /></td>
+						<td><button type="submit" class="btn btn-primary" style="width: 65px; margin-left: 10px;"><b>登入</b></button></td>
+                        </form>
 					</tr>
 				</table>
 			</div>
@@ -32,11 +34,11 @@
 					<h4><b>First time here?</b></h4>
 				</div>
 				<form method="post" action="user/signup">
-					<input type="text" class="form-control" name="account" placeholder="Please type Account"
+					<input type="text" class="form-control" name="signup_account" placeholder="Please type Account"
 					style="width:300px; margin-left:15px; margin-top:15px;"/>
-					<input type="password" class="form-control" name="pw" placeholder="Please type Password" 
+					<input type="password" class="form-control" name="signup_passwd" placeholder="Please type Password" 
 					style="width:300px; margin-left:15px; margin-top:10px;"/>
-					<input type="text" class="form-control" name="name" placeholder="Please type Chinese Name" 
+					<input type="text" class="form-control" name="signup_name" placeholder="Please type Chinese Name" 
 					style="width:300px; margin-left:15px; margin-top:10px;"/>
 					<button type="submit" class="btn btn-success" style="width: 65px; margin-left:245px; margin-top:10px;"><b>註冊</b></button>
 				</form>
