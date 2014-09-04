@@ -43,6 +43,17 @@ class Property_model extends CI_Model {
 		*/
         }
 
+	public function get_property_by_location($location_id){
+		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name
+                        from property pr, location lo, property_type pt
+                        where 
+			pr.location_id = lo.id 
+			AND pr.property_type = pt.id 
+			AND pr.is_delete = 0
+			AND pr.location_id = $location_id";
+		$query = $this->db->query($sql);
+		return $query->result_array();	
+	}
 	
 	public function get_propertyType(){
 		

@@ -79,7 +79,7 @@
   </div>
 
   <!-- fixed size container -->
-  <div style="height:700px; width:auto;">
+  <div style="height:auto; width:auto;">
 	<?php if( !empty($pageHeaderBig)) : ?>
 	<!-- we need a form here.-->
         <div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:180;"><b><?php echo $pageHeaderBig;?></b><small><b><?php echo $pageHeaderSmall;?></b></small></h1></div>

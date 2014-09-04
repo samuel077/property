@@ -82,9 +82,15 @@ class Property extends CI_Controller {
 	public function location(){
 		// list all the property by location
 		$data['title'] = "HSNG 財產管理平台";
-		// TBD 這個地方還沒有完成 
-		//$data['propertyList'] = $this->property_model->get_property_by_location();
-                $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
+		// TBD 這個地方還沒有完成
+		$locationList = $this->property_model->get_location();
+		foreach($locationList as $value => $location)
+		{
+			$data['ptList'][$location['id']]['propertyList'] = $this->property_model->get_property_by_location($location['id']);
+			$data['ptList'][$location['id']]['name'] = $location['name'];
+			$data['ptList'][$location['id']]['id'] = $location['id'];
+		} 
+		
                 $data['pageHeaderBig'] = "財產列表";
                 $data['pageHeaderSmall'] = "以放置地區區分";
                 $data['session'] = $_SESSION;
@@ -93,7 +99,7 @@ class Property extends CI_Controller {
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
 
-                $this->load->view('templates/header', $data);
+                $this->load->view('property/location_header', $data);
                 $this->load->view('property/location', $data);
                 $this->load->view('templates/footer');
 
