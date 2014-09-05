@@ -182,10 +182,8 @@ Class User extends CI_Controller {
                 else
                 {
                     $this->user_model->add_user();
-                    $this->load->view('templates/header', $data);
-                    $this->load->view('user/signup_success');
-                    $this->load->view('user/signup');
-                    $this->load->view('templates/footer');
+		    echo '<script>alert("註冊申請完成，管理者將審核您的帳號申請");</script>';
+		    redirect('/', 'refresh');
                 }
             //}
         }
