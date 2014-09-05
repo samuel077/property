@@ -52,7 +52,7 @@
 		<li class="divider"></li>
                 <!-- <li><a href="#">危險財產清單</a></li>-->
                 <li><a href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;新建使用者</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;審核使用者頁面</a></li>
+                <li><a href="<?=base_url("/user/checkuser")?>"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;審核使用者頁面</a></li>
               </ul>
           </li>
 	  	<? endif; ?>

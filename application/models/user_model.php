@@ -45,7 +45,32 @@ class User_model extends CI_Model {
 
         $this->db->insert('user',$data);
     } 
-    
+
+    // modify by Samuel @ 2014/09/05 找出待審核的使用者 
+    function getUncheckUser(){
+	$sql = "Select id, name, school_id, account, enroll_year from user where account_status_id = 1 OR account_status_id = 2";
+	
+	$query = $this->db->query($sql);
+	return $query->result_array();
+    }
+
+    function updateAccountStatus($userId, $approved){
+	if($approved)
+		$status = 3;
+	
+	else
+		$status = 4;
+	$data = array('account_status_id' => $status);
+	
+	$this->db->where('id', $userId);
+	$this->db->update('user', $data);
+	// 有 update 成功，affected_rows() = 1
+	if( $this->db->affected_rows() > 0 )
+		return TRUE;
+	else
+		return FALSE;
+    } 
+ 
     function login_check($account,$passwd)    
     {
  

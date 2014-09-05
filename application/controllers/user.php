@@ -30,15 +30,15 @@ Class User extends CI_Controller {
         public function edit($userId) {
                 echo $userrId;
         }
-        
+
 
         public function login()
         {
+		echo "in login page;";
             $account = $this->input->post('login_account'); 
             $password = md5($this->input->post('login_passwd'));
 
             $result = $this->user_model->login_check($account,$password);
-
             $data['title'] = "HSNG財產管理平台";
 
             if($result == FALSE)
@@ -50,7 +50,6 @@ Class User extends CI_Controller {
 		// admin = 1
                 if($result->hsng_role_id == 1)
                 {
-		    echo "in here";
 		    $_SESSION['username'] = $result->name;
 		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
 
@@ -67,12 +66,38 @@ Class User extends CI_Controller {
                 }
                 else if($result->hsng_role_id == 3)
                 {
+		    $_SESSION['username'] = $result->name;
+		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
 
+		    redirect('/property/index', 'refresh');	
                 }
             }
 
         }
 
+	// modify by Samuel @ 2014/09/05
+	public function checkuser(){
+		// 1. 先把註冊狀態為 1 或是 2 的使用者先出來
+		// 2. 把 user list 丟到 前面產生table
+		$data['userlist'] = $this->user_model->getUncheckUser();
+		
+		$data['title'] = "HSNG 財產管理平台";
+                $data['pageHeaderBig'] = "使用者列表";
+                $data['pageHeaderSmall'] = "你的帳號，我來審核";
+                $data['session'] = $_SESSION;
+                if($_SESSION['hsng_role_id'] == 1){
+                        $data['is_admin'] = true;
+                }else{
+                        $data['is_admin'] = false;
+                }
+                $data['user_name'] = $_SESSION['username'];
+	
+		$this->load->view('templates/header', $data);
+                $this->load->view('user/checkuser');
+                $this->load->view('templates/footer');	
+		
+	}
+	
 	// modify by Samuel @ 2014/09/05
 	public function logout(){
 		// 清空 session，然後回到首頁
@@ -81,6 +106,18 @@ Class User extends CI_Controller {
 		redirect('/', 'refresh');
 	}
 
+	// modify by Samuel @ 2014/09/05
+	public function approve($userId){
+		$data['userlist'] = $this->user_model->updateAccountStatus($userId, true );
+		redirect('/user/checkuser', 'refresh');
+	}
+	        
+	// modify by Samuel @ 2014/09/05
+	public function disapprove($userId){
+		$data['userlist'] = $this->user_model->updateAccountStatus($userId, false);
+		redirect('/user/checkuser', 'refresh');
+	}
+        
         public function signup()
         {
             $this->load->library('form_validation');

@@ -100,8 +100,12 @@ class Property extends CI_Controller {
                 $data['pageHeaderBig'] = "財產列表";
                 $data['pageHeaderSmall'] = "以放置地區區分";
                 $data['session'] = $_SESSION;
-                $data['is_admin'] = true;
-                $data['user_name'] = "管理者";
+		if($_SESSION['hsng_role_id'] == 1){
+                        $data['is_admin'] = true;
+                }else{
+                        $data['is_admin'] = false;
+                }
+                $data['user_name'] = $_SESSION['username'];
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
 
