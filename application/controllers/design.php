@@ -12,9 +12,9 @@ class Design extends CI_Controller {
 		if(isset($_SESSION['username']))
 			redirect('/property/', 'refresh');
 		else{
-	                $data['title'] = "HSNG 財產管理平台";
-	                //$_SESSION['username'] = "s750716@gmail.com";
-       	         	//$_SESSION['userRole'] = "admin";
+            $data['title'] = "HSNG 財產管理平台";
+            //$_SESSION['username'] = "s750716@gmail.com";
+            //$_SESSION['userRole'] = "admin";
 			//$data['session'] = $_SESSION;
 
 			$this->load->view('home_design/design_header.php', $data);
