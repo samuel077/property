@@ -47,18 +47,20 @@ Class User extends CI_Controller {
             }
             else
             {
+		$_SESSION['username'] = $result->name;
+		$_SESSION['hsng_role_id'] = $result->hsng_role_id;
+		$_SESSION['user_id'] = $result->id;
+	
+		redirect('/property/index','refresh');	
 		// admin = 1
+		/*
                 if($result->hsng_role_id == 1)
                 {
 		    $_SESSION['username'] = $result->name;
 		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
-
+		    $_SESSION['id'] = $result->id;
+	
 		    redirect('/property/index', 'refresh');	
-		/*
-                    $this->load->view('templates/header', $data);
-                    $this->load->view('property/index');
-                    $this->load->view('templates/footer');
-		 */
                 }
                 else if($result->hsng_role_id == 2)
                 {
@@ -70,7 +72,7 @@ Class User extends CI_Controller {
 		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
 
 		    redirect('/property/index', 'refresh');	
-                }
+                }*/
             }
 
         }

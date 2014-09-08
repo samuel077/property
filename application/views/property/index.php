@@ -50,7 +50,7 @@
 			<td><?php echo $value['brand'];?></td>
 			<td><?php echo $value['location_name'];?></td>
 			<td><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
-			<td><button type="button" class="btn btn-primary">申請借用</button></td>
+			<td><button type="button" class="btn btn-primary" data-target="#borrow<?echo $value['serial_id']?>" data-toggle="modal" >申請借用</button></td>
 			<?php if(isset($is_admin)) : ?>
 				<?php if($is_admin) :?>
 				<td> 
@@ -254,6 +254,29 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button type="submit" class="btn btn-danger">確認刪除</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+
+<?php foreach($propertyList as $list => $value) :?>
+<div class="modal fade" id="borrow<?php echo $value['serial_id']?>" style="align:center; font-family:Microsoft JhengHei;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form class="form-horizontal" role="form" action="<?=base_url("/property/borrow")?>" method="post">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-list"></span> &nbsp; <b>申請借用財產</b></h4>
+      </div>
+      <div class="modal-body">
+          <p><h3>確認是否申請借用財產&nbsp;『<?php echo $value['name']?>』</h3></p>
+      </div>
+      <input id="property_id" name="property_id" type="hidden" value="<?php echo $value['id']?>">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">申請用借</button>
       </div>
       </form>
     </div>

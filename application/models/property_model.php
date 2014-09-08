@@ -69,6 +69,25 @@ class Property_model extends CI_Model {
 		
 	}
 
+	public function borrowPropertyByUserId($userId, $propertyId){
+		echo "got you here in model";
+		echo "usre id = ".$userId." and propertyId = ".$propertyId;
+		                // 使用 post 的資料來 set 資料庫
+                $this->load->helper('url');
+
+		$propertyUsage = array(
+			'user_id' => $userId, 
+			'property_id' => $propertyId, 
+			'issue_date' => date("Y-m-d H:i:s"), 
+			'is_approved' => -1, 
+			'admin_sign_date' => null, 
+			'execuse' => null, 
+			'note' => null
+		);
+
+		$this->db->insert('property_usage', $propertyUsage);
+	}
+
 	public function getPropertyCountBySearchTerm($searchterm){
                 if($searchterm == ""){
                         $sql = "SELECT count(*) as count from property WHERE 1";

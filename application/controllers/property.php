@@ -145,6 +145,13 @@ class Property extends CI_Controller {
 		redirect('/property', 'refresh');	
         }
 	
+	public function borrow(){
+		print_r($_POST);
+		print_r($_SESSION);
+		//
+		$this->property_model->borrowPropertyByUserId($_SESSION['user_id'],$_POST['property_id']);
+	}
+	
 	// add @ 2014/09/04
 	// 用來顯示可報廢的財產
 	public function dumplist(){

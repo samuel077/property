@@ -74,7 +74,7 @@ class User_model extends CI_Model {
     function login_check($account,$passwd)    
     {
  
-        $this->db->select('name,hsng_role_id,account_status_id');
+        $this->db->select('id,name,hsng_role_id,account_status_id');
         $this->db->from('user');
         $this->db->where('account',$account);
         $this->db->where('password',$passwd);
