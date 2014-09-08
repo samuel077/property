@@ -31,7 +31,7 @@
               <ul class="dropdown-menu" role="menu">
 		<?php if(isset($is_admin)) : ?>
 			<?php if($is_admin) : ?>
-                		<li><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;會員列表</a></li>
+                <li><a href="<?=base_url("/user/list_user")?>"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;會員列表</a></li>
 			<?php else : ?>
                 		<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;個人資料(待討論)</a></li>
                 		<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;財產借用列表</a></li>
@@ -51,17 +51,18 @@
                 <li><a href="<?=base_url("/property/countedlist")?>"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;年度清點財產結果</a></li>
 		<li class="divider"></li>
                 <!-- <li><a href="#">危險財產清單</a></li>-->
-                <li><a href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;新建使用者</a></li>
+                <li><a href="<?=base_url("/user/signup")?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;新建使用者</a></li>
                 <li><a href="<?=base_url("/user/checkuser")?>"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;審核使用者頁面</a></li>
+                <li><a href="<?=base_url("/property/application")?>"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;審核財產借用頁面</a></li>
               </ul>
           </li>
 	  	<? endif; ?>
 	  <? endif; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-		<?php if(isset($user_name)) : ?>
+	    <?php if(isset($_SESSION['username'])) : ?>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user_name;?><span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['username'];?><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu" style="width:50px;">
                 <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;設定</a></li>
                 <li><a href="<?=base_url("/user/logout")?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;登出</a></li>
@@ -69,7 +70,7 @@
           </li>
           <? endif; ?>
 		<!--
-		<?php if(isset($user_name)) : ?>
+		<?php if(isset($_SESSION['username'])) : ?>
 	  		<li> <a href="#"><?php echo $user_name;?></a></li>
 		<?php endif; ?>
 		-->

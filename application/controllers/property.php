@@ -136,6 +136,7 @@ class Property extends CI_Controller {
                 $this->load->view('templates/footer');
 
         }
+
 	
 	// actually this is not a real remove. we simply set is delete as true;
         public function remove() {
@@ -146,9 +147,6 @@ class Property extends CI_Controller {
         }
 	
 	public function borrow(){
-		print_r($_POST);
-		print_r($_SESSION);
-		//
 		$this->property_model->borrowPropertyByUserId($_SESSION['user_id'],$_POST['property_id']);
 	}
 	
@@ -194,6 +192,40 @@ class Property extends CI_Controller {
 
 	}
 
+	// modify by Samuel @ 2014/09/09
+	// 用來顯示財產管理網頁借用財產的審核頁面
+	public function application(){
+
+		$data['title'] = "HSNG 財產管理平台";
+                // TBD 這個地方還沒有完成
+                //$data['propertyList'] = $this->property_model->get_property_by_location();
+                $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
+                $data['pageHeaderBig'] = "財產借用審核頁面";
+                $data['pageHeaderSmall'] = "(不知道要填什麼)";
+                $data['session'] = $_SESSION;
+                $data['is_admin'] = true;
+                $data['user_name'] = "管理者";
+		$data['propertyBorrowList'] = $this->property_model->getPropertyBorrowUnsignedList();
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('property/application', $data);
+                $this->load->view('templates/footer');
+	}
+
+	// modify by Samuel @ 2014/09/09
+	// 同意借用財產
+	public function approve_app($propertyUsageId){
+		$this->property_model->setPropertyUsageStatus(true, $propertyUsageId);
+		redirect('/property', 'refresh');
+	}
+	
+	// modify by Samuel @ 2014/09/09
+	// 不同意借用財產
+	public function disapprove_app($propertyId){
+		$this->property_model->setPropertyUsageStatus(false, $propertyUsageId);
+		redirect('/property', 'refresh');
+	}
+	
 	public function export($propertyId){
 		echo $propertyId;
 	}

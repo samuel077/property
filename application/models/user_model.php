@@ -7,11 +7,14 @@ class User_model extends CI_Model {
         $this->load->database();
     }
     
-    function add_user()
+    function add_user($is_admin)
     {
         $default_hsng_role = 3; 
         $default_user_state = 1;
-        $default_account_status = 1;
+        if($is_admin)
+            $default_account_status = 3;
+        else
+            $default_account_status = 1;
         $enroll_year = intval($this->input->post('enroll_year'));
         $identity_type = intval($this->input->post('identity_type'));
 
@@ -90,6 +93,18 @@ class User_model extends CI_Model {
         {
             return false;
         }
+    }
+
+    function list_user()
+    {
+        $id = 1;
+        $this->db->select('name,school_id,account,phone_number,email,hsng_role_id,user_status_id,account_status_id,enroll_year,expected_graduate_year,identity_type');  
+        $this->db->form('user');
+        $this->db->where('id !=',$id);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 } 
 

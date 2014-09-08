@@ -34,16 +34,16 @@ Class User extends CI_Controller {
 
         public function login()
         {
-		echo "in login page;";
             $account = $this->input->post('login_account'); 
             $password = md5($this->input->post('login_passwd'));
-
+	
             $result = $this->user_model->login_check($account,$password);
             $data['title'] = "HSNG財產管理平台";
 
             if($result == FALSE)
             {
-
+		echo '<script>alert("登入失敗，請重新登入。");</script>';
+		redirect('/', 'refresh');
             }
             else
             {
@@ -61,18 +61,18 @@ Class User extends CI_Controller {
 		    $_SESSION['id'] = $result->id;
 	
 		    redirect('/property/index', 'refresh');	
-                }
-                else if($result->hsng_role_id == 2)
+		// admin = 1
+                if($result->hsng_role_id == 1)
                 {
+		            $_SESSION['username'] = $result->name;
+		            $_SESSION['hsng_role_id'] = $result->hsng_role_id;
 
-                }
-                else if($result->hsng_role_id == 3)
-                {
-		    $_SESSION['username'] = $result->name;
-		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
-
-		    redirect('/property/index', 'refresh');	
-                }*/
+		            redirect('/property/index', 'refresh');	
+		            /*
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('property/index');
+                    $this->load->view('templates/footer');
+		            */
             }
 
         }
@@ -124,58 +124,17 @@ Class User extends CI_Controller {
         {
             $this->load->library('form_validation');
             
-            
-            $data['account'] = $this->input->post('signup_account');
-            $data['passwd'] = $this->input->post('signup_passwd');
-            $data['name'] = $this->input->post('signup_name');
-            
-            $data['title'] = 'Sign up';
-            //$data['identity_type'] = $this->user_model->get_identity_type();
+            $data['title'] = "HSNG 財產管理平台";
 
-            $config = array(
-                            array(
-                                'field' => 'account',
-                                'label' => 'User Account',
-                                'rules' => 'trim|required|min_length[5]|max_length[20]|xss_clean'
-                            ),
-                            array(
-                                'field' => 'passwd',
-                                'label' => 'User Password',
-                                'rules' => 'trim|required'
-                            ),
-                            array(
-                                'field' => 'name',
-                                'label' => 'User Name',
-                                'rules' => 'trim|required'
-                            ),
-                            array(
-                                'field' => 'school_id',
-                                'label' => 'User School ID',
-                                'rules' => 'trim|required|numeric'
-                            ),
-                            array(
-                                'field' => 'phone_number',
-                                'label' => 'User Phone Number',
-                                'rules' => 'trim|required|numeric'
-                            ),
-                            array(
-                                'field' => 'email',
-                                'label' => 'User E-Mail',
-                                'rules' => 'trim|required|valid_email'
-                            ),
-                            array(
-                                'field' => 'enroll_year',
-                                'label' => 'User Enroll Year',
-                                'rules' => 'trim|required|numeric'
-                            )
-                    ); 
- 
+            if(isset($_SESSION['hsng_role_id']) && $_SESSION['hsng_role_id'] == 1)//已經進入系統，admin直接建立帳號
+            {
+                $data['is_admin'] = true;
+                $data['pageHeaderBig'] = "創建帳號";
+                $data['pageHeaderSmall'] = "你的帳號，admin來創";
 
-            //$this->form_validation->set_rules($config);
-
-            if(!$this->input->post('send_btn'))
-            //{
-                //if ($this->form_validation->run() == FALSE)
+                if(!$this->input->post('send_btn'))
+                //{
+                //if ($this->form_validation->run('signup') == FALSE)
                 {
                     $this->load->view('templates/header', $data);
                     $this->load->view('user/signup', $data);
@@ -183,19 +142,43 @@ Class User extends CI_Controller {
                 }
                 else
                 {
-                    $this->user_model->add_user();
-		    echo '<script>alert("註冊申請完成，管理者將審核您的帳號申請");</script>';
-		    redirect('/', 'refresh');
+                    $this->user_model->add_user($data['is_admin']);
+		            echo '<script>alert("Add Success!!");</script>';
+		            redirect('user/signup', 'refresh');
                 }
-            //}
+                //}
+            }
+            else//未進入系統，使用者自行註冊
+            {
+                $data['is_admin'] = false;
+                $data['account'] = $this->input->post('signup_account');
+                $data['passwd'] = $this->input->post('signup_passwd');
+                $data['name'] = $this->input->post('signup_name');
+
+                if(!$this->input->post('send_btn'))
+                //{
+                //if ($this->form_validation->run('signup') == FALSE)
+                {
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('user/signup', $data);
+                    $this->load->view('templates/footer');
+                }
+                else
+                {
+                    $this->user_model->add_user($data['is_admin']);
+		            echo '<script>alert("註冊申請完成，管理者將審核您的帳號申請");</script>';
+		            redirect('/', 'refresh');
+                }
+                //}
+            }
+            //$data['identity_type'] = $this->user_model->get_identity_type();
+            
+            
         }
 
-        public function signup_success()
+        public function user_list()
         {
-            $data['title'] = 'Sign up';
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/signup_success');
-            $this->load->view('templates/footer');
+
         }
 }
 ?>

@@ -7,19 +7,31 @@
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者帳號</label>
             <div class = "col-sm-4">
-            <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value ="<?php echo set_value('account',$account); ?>" />
+            <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value ="<?php 
+                if(!$is_admin)
+                {
+                    echo set_value('account',$account);
+                } ?>" />
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者密碼</label>
             <div class = "col-sm-4">
-            <input name = "passwd" type = "password" class = "form-control" placeholder = "請輸入使用者密碼" value ="<?php echo set_value('password',$passwd); ?>"/>
+            <input name = "passwd" type = "password" class = "form-control" placeholder = "請輸入使用者密碼" value ="<?php 
+                if(!$is_admin)
+                {
+                    echo set_value('password',$passwd);
+                }?>"/>
             </div>
         </div>
         <div class = "form-group">
             <label class = "col-sm-2 control-label">使用者姓名</label>
             <div class = "col-sm-4">
-            <input name = "name" type = "text" class = "form-control" placeholder = "請輸入使用者姓名" value="<?php echo set_value('name',$name); ?>"/>
+            <input name = "name" type = "text" class = "form-control" placeholder = "請輸入使用者姓名" value="<?php 
+                if(!$is_admin)
+                {
+                    echo set_value('name',$name); 
+                }?>"/>
             </div>
         </div>
         <div class = "form-group">

@@ -117,6 +117,34 @@ class Property_model extends CI_Model {
 			return $query->num_rows;
 		}
         }
+
+	// modified by Samuel @ 2014/09/09
+	// 用來 query 使用者借用財產的紀錄	
+	public function getPropertyBorrowUnsignedList(){
+		// is approved = -1 表示剛申請，申請通過為1，不通過為0
+		$sql = "SELECT pr.serial_id, pr.name, pr.brand, pt.name as property_type_name, ur.name as borrower, pu.issue_date, pu.id as appId
+			FROM property pr, property_type pt, user ur, property_usage pu
+			WHERE 
+			pu.user_id = ur.id
+			AND pu.property_id = pr.id
+			AND pt.id = pr.property_type
+			AND pu.is_approved = -1
+			";
+		 $query = $this->db->query($sql);
+		 return $query->result_array();	
+	}
+
+	public function setPropertyUsageStatus($isApproved, $propertyUsageId){
+		if($isApproved){
+			$data = array('is_approved' => '1');
+		}else{
+			$data = array('is_approved' => '0');
+		}
+		
+		$this->db->where('id', $propertyUsageId);
+                $this->db->update('property_usage', $data);
+
+	}
 	
 	public function set_property(){
 		// 使用 post 的資料來 set 資料庫
