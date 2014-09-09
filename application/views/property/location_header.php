@@ -4,10 +4,12 @@
 	<title><?php echo $title?></title>
 	<link rel="stylesheet" href="<?=base_url("/public/css/bootstrap.min.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/public/css/navbar.css")?>">
+	<link rel="stylesheet" href="<?=base_url("/public/css/scrollspy.css")?>">
 	<!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
 	<script src="<?=base_url("/public/js/jquery-1.11.1.min.js")?>"></script>
 	<script src="<?=base_url("/public/js/bootstrap.js")?>"></script>
 <!--	<link rel="stylesheet" href="<?=base_url("/public/css/bootstrap-responsive.min.css")?>"> -->
+<script>$('body').scrollspy({ target: '#my_scrollspy' });</script>
 </head>
 <body>
 <div class="container">

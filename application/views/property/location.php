@@ -1,12 +1,27 @@
-<?php foreach($ptList as $value => $ptlist) :?>
-<br/>
-<br/>
-<div>
-	<h2><kbd><?php echo $ptlist['name'];?></kbd></h2>
-	<button class="btn btn-info pull-right" style="margin-right:30px;">列印</button>
-</div>
+<div class="row"> 
+<!--Nav Bar -->
+    <nav class="col-xs-2" id = "my_scrollspy">
+        <ul id="sidebar" class="nav nav-list affix">
+            <li class="nav nav-stacked"><a href="#LAB315">LAB 315</a></li>
+            <li><a href="#LAB501">LAB 501</a></li>
+	    <li><a href="#LAB402">LAB 402</a></li>
+            <li><a href="#LAB510A">LAB 510A</a></li>
+            <li><a href="#LAB501D">LAB 501D</a></li>
+            <li><a href="#R206">R 206</a></li>
+        </ul>
+    </nav>
 
-<table class="table table-striped" style="align:center; font-family:Microsoft JhengHei;">
+    <div class="col-xs-10" >
+    <?php foreach($ptList as $value => $ptlist) :?>
+    <section id="<?php echo $ptlist['name'];?>" >
+	<br/>
+	<br/>
+	<div>
+		<h2><kbd><?php echo $ptlist['name'];?></kbd></h2>
+		<button class="btn btn-info pull-right" style="margin-right:30px;">列印</button>
+	</div>
+
+	<table class="table table-striped" style="align:center; font-family:Microsoft JhengHei;">
         <thead>
                 <tr>
                         <th>財產編號</th>
@@ -31,5 +46,8 @@
 		</tr>
         <?php endforeach; ?>
         </table>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+    </section>
+	</div>
+</div>
 
