@@ -109,9 +109,12 @@ class Property extends CI_Controller {
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
 
-                $this->load->view('property/location_header', $data);
-                $this->load->view('property/location', $data);
-                $this->load->view('templates/footer');
+		//$this->load->view('property/location_scroll', $data);
+		
+                //$this->load->view('property/location_header', $data);
+                $this->load->view('property/location_scroll', $data);
+                //$this->load->view('templates/footer');
+		
 
 	}
 

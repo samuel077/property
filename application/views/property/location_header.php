@@ -2,16 +2,58 @@
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title?></title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!--
 	<link rel="stylesheet" href="<?=base_url("/public/css/bootstrap.min.css")?>">
-	<link rel="stylesheet" href="<?=base_url("/public/css/navbar.css")?>">
-	<link rel="stylesheet" href="<?=base_url("/public/css/scrollspy.css")?>">
+	<link rel="stylesheet" href="<?=base_url("/public/css/navbar.css")?>"> -->
+	<!-- <link rel="stylesheet" href="<?=base_url("/public/css/scrollspy.css")?>"> -->
 	<!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+	<!--
 	<script src="<?=base_url("/public/js/jquery-1.11.1.min.js")?>"></script>
-	<script src="<?=base_url("/public/js/bootstrap.js")?>"></script>
+	<script src="<?=base_url("/public/js/bootstrap.js")?>"></script> -->
 <!--	<link rel="stylesheet" href="<?=base_url("/public/css/bootstrap-responsive.min.css")?>"> -->
-<script>$('body').scrollspy({ target: '#my_scrollspy' });</script>
+<!-- <script>$('body').scrollspy({ target: '#my_scrollspy' });</script> -->
+<style type="text/css">
+/* Custom Styles */
+ul.nav-tabs {
+        width: 140px;
+        margin-top: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+}
+ul.nav-tabs li {
+        margin: 0;
+        border-top: 1px solid #ddd;
+}
+ul.nav-tabs li:first-child {
+        border-top: none;
+}
+ul.nav-tabs li a {
+        margin: 0;
+        padding: 8px 16px;
+        border-radius: 0;
+}
+ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+        color: #fff;
+        background: #0088cc;
+        border: 1px solid #0088cc;
+}
+ul.nav-tabs li:first-child a {
+        border-radius: 4px 4px 0 0;
+}
+ul.nav-tabs li:last-child a {
+        border-radius: 0 0 4px 4px;
+}
+ul.nav-tabs.affix {
+        top: 30px; /* Set the top position of pinned element */
+}
+</style>
 </head>
-<body>
+<body data-spy="scroll" data-target="#myScrollspy">
 <div class="container">
 <div class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
