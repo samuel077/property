@@ -50,7 +50,11 @@
 			<td><?php echo $value['brand'];?></td>
 			<td><?php echo $value['location_name'];?></td>
 			<td><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
+			<?php if(!isset($value['borrowerName'])) :?>
 			<td><button type="button" class="btn btn-primary" data-target="#borrow<?echo $value['serial_id']?>" data-toggle="modal" >申請借用</button></td>
+			<?php else : ?>
+			<td><?php echo $value['borrowerName'];?></td>
+			<?php endif;?>
 			<?php if(isset($is_admin)) : ?>
 				<?php if($is_admin) :?>
 				<td> 

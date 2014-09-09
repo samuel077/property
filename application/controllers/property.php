@@ -8,6 +8,7 @@ class Property extends CI_Controller {
                 parent::__construct();
                 session_start();
 		$this->load->model('property_model');
+		$this->load->model('user_model');
         }
 	
         public function index()
@@ -41,7 +42,6 @@ class Property extends CI_Controller {
 	}	
 	
         public function create() {
-		
 		$data['session'] = $_SESSION;
 		$data['title'] = "財產管理平台 新建財產";
 		$data['pageHeaderBig'] = "新建財產";
@@ -147,7 +147,9 @@ class Property extends CI_Controller {
         }
 	
 	public function borrow(){
+		echo '<script>alert("已申請借用，待管理者審核");</script>';
 		$this->property_model->borrowPropertyByUserId($_SESSION['user_id'],$_POST['property_id']);
+		redirect('/','refresh');
 	}
 	
 	// add @ 2014/09/04
@@ -276,6 +278,12 @@ class Property extends CI_Controller {
 
                 $data['title'] = "HSNG 財產管理平台";
                 $data['propertyList'] = $this->property_model->get_property($offset, $this->perpage, $searchterm);
+		for($i = 0 ; $i < count($data['propertyList']); $i++){
+			// borrower 有人 而且 is_approved 是1
+			if($data['propertyList'][$i]['borrower'] != null && $data['propertyList'][$i]['is_approved'] == 1){
+				$data['propertyList'][$i]['borrowerName'] = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
+			}
+		}
                 $data['pageHeaderBig'] = "財產列表";
                 $data['pageHeaderSmall'] = "全部列表";
                 $data['session'] = $_SESSION;

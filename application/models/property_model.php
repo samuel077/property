@@ -10,9 +10,14 @@ class Property_model extends CI_Model {
         public function get_property($offset, $limit, $searchterm)
         {
 		//echo "message from property_mode, searchterm = ".$searchterm."<br/>";
-		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name 
-			from property pr, location lo, property_type pt 
-			where pr.location_id = lo.id AND pr.property_type = pt.id AND pr.is_delete = 0"; /* LIMIT $offset, $limit";*/
+		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name, pu.user_id as borrower, pu.is_approved 
+			FROM property pr LEFT JOIN property_usage pu ON pr.id = pu.property_id, 
+			location lo, property_type pt
+			WHERE
+			pr.location_id = lo.id 
+			AND pr.property_type = pt.id 
+			AND pr.is_delete = 0
+			"; /* LIMIT $offset, $limit";*/
 		if($searchterm != ""){
 			$sql .= " AND (
 					pr.name LIKE '%$searchterm%'

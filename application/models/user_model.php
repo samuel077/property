@@ -94,6 +94,17 @@ class User_model extends CI_Model {
             return false;
         }
     }
+    
+    // modify by Samuel @ 2014/09/09
+    // 取得 user 的 名字 
+    public function getUserNameByUserId($userId){
+	$this->db->select('name');
+	$this->db->from('user');
+	$this->db->where('id', $userId);
+	$query = $this->db->get();
+	$a = $query->result_array();
+	return $a[0]['name'];
+    }
 
     function list_user()
     {

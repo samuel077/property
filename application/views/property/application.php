@@ -21,7 +21,7 @@
                         <td><?php echo $value['borrower']?></td>
                         <td><?php echo $value['issue_date']?></td>
 			<td>
-			<button type="button" class="btn btn-primary" onclick="javascript:location.href='<?=base_url("/property/approve_app/")?><?php echo "/".$value['appId']?>'"><span class="glyphicon glyphicon-ok"></span></button>
+			<button type="button" class="btn btn-success" onclick="javascript:location.href='<?=base_url("/property/approve_app/")?><?php echo "/".$value['appId']?>'"><span class="glyphicon glyphicon-ok"></span></button>
 			&nbsp;
 			<button type="button" class="btn btn-danger" onclick="javascript:location.href='<?=base_url("/property/disapprove_app/")?><?php echo "/".$value['appId']?>'"><span class="glyphicon glyphicon-remove"></span></button>
 			 
