@@ -7,6 +7,12 @@ class Property extends CI_Controller {
 	public function __construct(){
                 parent::__construct();
                 session_start();
+		// modified by Samuel @ 2014/09/09
+		// 一般來說，property 的使用都需 session 才行，若沒有 session 存在，則導回首頁。
+		if(!isset($_SESSION['user_id'])){
+			redirect('/', 'refresh');
+		}
+
 		$this->load->model('property_model');
 		$this->load->model('user_model');
         }
@@ -272,21 +278,52 @@ class Property extends CI_Controller {
 			//echo "total rows <= rowfrom + perpage";
 			$data['rowTo'] = $data['totalRows'];
 		}
-		/*
-		echo "<pre>";	
-		print_r($data);
-		echo "</pre>";	
-		*/
-		//echo $data['pagination'];
 
                 $data['title'] = "HSNG 財產管理平台";
                 $data['propertyList'] = $this->property_model->get_property($offset, $this->perpage, $searchterm);
 		for($i = 0 ; $i < count($data['propertyList']); $i++){
 			// borrower 有人 而且 is_approved 是1
-			if($data['propertyList'][$i]['borrower'] != null && $data['propertyList'][$i]['is_approved'] == 1){
-				$data['propertyList'][$i]['borrowerName'] = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
+			if($data['propertyList'][$i]['borrower'] == null){
+				//沒有人借
+				$applyButtonString = "申請借用";
+				$applyButtonStyle = "btn btn-primary";
+				$applyButtonExtraInfo = 'data-target="#borrow'.$data['propertyList'][$i]['serial_id'].'" data-toggle="modal"';
 			}
+			else if($data['propertyList'][$i]['borrower'] == $_SESSION['user_id']){
+				// 是自己借的
+				// is_approved = -1 表示審核中
+				if($data['propertyList'][$i]['is_approved'] == -1){
+					$applyButtonString = "申請審核中";
+					$applyButtonStyle = "btn btn-warning";
+					$applyButtonExtraInfo = "disabled";
+				}
+				else if($data['propertyList'][$i]['is_approved'] == 1){
+					$applyButtonString = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
+					$applyButtonStyle = "btn btn-default";
+					$applyButtonExtraInfo = "disabled";
+				}
+			}
+			else{
+				// 是別人借的
+                                if($data['propertyList'][$i]['is_approved'] == -1){
+                                        $applyButtonString = "它人已申請";
+                                        $applyButtonStyle = "btn btn-warning";
+					$applyButtonExtraInfo = "disabled";
+                                }
+                                else if($data['propertyList'][$i]['is_approved'] == 1){
+                                        $applyButtonString = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
+                                        $applyButtonStyle = "btn btn-default";
+					$applyButtonExtraInfo = "disabled";
+                                }
+			}
+			$data['propertyList'][$i]['applyButtonString'] = $applyButtonString;
+			$data['propertyList'][$i]['applyButtonStyle'] = $applyButtonStyle;
+			$data['propertyList'][$i]['applyButtonExtraInfo'] = $applyButtonExtraInfo;
+			//if($data['propertyList'][$i]['borrower'] != null && $data['propertyList'][$i]['is_approved'] == 1){
+			//	$data['propertyList'][$i]['borrowerName'] = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
+			//}
 		}
+
                 $data['pageHeaderBig'] = "財產列表";
                 $data['pageHeaderSmall'] = "全部列表";
                 $data['session'] = $_SESSION;
