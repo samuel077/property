@@ -55,7 +55,11 @@
 			<td style="text-align: center;"><?php echo $value['location_name'];?></td>
 			<td style="text-align: center;"><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
 			<?php if(!isset($value['borrowerName'])) :?>
+				<?php if(!isset($value['is_approved'])) : ?>
 			<td style="text-align: center;"><button type="button" class="btn btn-primary" data-target="#borrow<?echo $value['serial_id']?>" data-toggle="modal" >申請借用</button></td>
+				<?php elseif($value['is_approved'] == -1) : ?>
+			<td style="text-align: center;"><button type="button" class="btn btn-warning" disabled>審核中...</button></td>
+				<?php endif;?>
 			<?php else : ?>
 			<td style="text-align: center;"><?php echo $value['borrowerName'];?></td>
 			<?php endif;?>
