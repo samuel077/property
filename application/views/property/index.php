@@ -27,37 +27,41 @@
           </div>
         </form>
 	<!-- add a list page -->
-	<table class="table table-striped" style="align:center; font-family:Microsoft JhengHei;">
+	<table class="table table-striped table-hover" style=" font-family:Microsoft JhengHei;">
 	<thead> 
 		<tr>
 			<th>財產編號</th>
 			<th>名稱</th>
-			<th>廠牌</th>
-			<th>擺放位置</th>
-			<th>詳細資訊</th>
-			<th>借用人</th>
+			<th style="text-align: center;">廠牌</th>
+			<th style="text-align: center;">擺放位置</th>
+			<th style="text-align: center;">詳細資訊</th>
+			<th style="text-align: center;">借用人</th>
 			<?php if(isset($is_admin)) : ?>
 				<?php if($is_admin) :?>
-				<th>管理者功能</th>
+				<th style="text-align: center;">管理者功能</th>
 				<?php endif; ?>
 			<?php endif; ?>
 		</tr>
 	</thead>
 		<?php foreach($propertyList as $list => $value) : ?>
 		<tr>
-			<td><?php echo $value['serial_id'];?></td>
-			<td><?php echo $value['name'];?></td>
-			<td><?php echo $value['brand'];?></td>
-			<td><?php echo $value['location_name'];?></td>
-			<td><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
+			<td width="15%"><?php echo $value['serial_id'];?></td>
+			<td> 
+				<div style="border-style:solid; border-width:0px; width: 250px; text-overflow: ellipsis; overflow: hidden">
+				<?php echo $value['name'];?>
+				</div>
+			</td>
+			<td style="text-align: center;"><?php echo $value['brand'];?></td>
+			<td style="text-align: center;"><?php echo $value['location_name'];?></td>
+			<td style="text-align: center;"><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
 			<?php if(!isset($value['borrowerName'])) :?>
-			<td><button type="button" class="btn btn-primary" data-target="#borrow<?echo $value['serial_id']?>" data-toggle="modal" >申請借用</button></td>
+			<td style="text-align: center;"><button type="button" class="btn btn-primary" data-target="#borrow<?echo $value['serial_id']?>" data-toggle="modal" >申請借用</button></td>
 			<?php else : ?>
-			<td><?php echo $value['borrowerName'];?></td>
+			<td style="text-align: center;"><?php echo $value['borrowerName'];?></td>
 			<?php endif;?>
 			<?php if(isset($is_admin)) : ?>
 				<?php if($is_admin) :?>
-				<td> 
+				<td style="text-align: center;"> 
 					<button type="button" class="btn btn-warning" data-target="#update<?php echo $value['serial_id']?>" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
 					&nbsp;
 					<button type="button" class="btn btn-danger" data-target="#delete<?php echo $value['serial_id']?>" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></button>
