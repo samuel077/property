@@ -159,7 +159,7 @@ Class User extends CI_Controller {
                 //{
                 //if ($this->form_validation->run('signup') == FALSE)
                 {
-                    $this->load->view('templates/signup_header', $data);
+                    $this->load->view('user/signup_header', $data);
                     $this->load->view('user/signup', $data);
                     $this->load->view('templates/footer');
                 }
