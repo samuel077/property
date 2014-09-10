@@ -244,12 +244,12 @@ class Property extends CI_Controller {
 		$data['title'] = "HSNG 財產管理平台";
                 // TBD 這個地方還沒有完成
                 //$data['propertyList'] = $this->property_model->get_property_by_location();
+		$data['personalPropertyList'] = $this->property_model->getPersonalProperty($_SESSION['user_id']);
+		die();
                 $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
                 $data['pageHeaderBig'] = "個人財產借用列表";
                 $data['pageHeaderSmall'] = "有借有還再借不難 ╰（‵□′）╯";
                 $data['session'] = $_SESSION;
-                $data['is_admin'] = true;
-                $data['user_name'] = "管理者";
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
 

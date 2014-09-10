@@ -32,7 +32,7 @@
 		<tr>
 			<th>財產編號</th>
 			<th>名稱</th>
-			<th style="text-align: center;">廠牌</th>
+			<!-- <th style="text-align: center;">廠牌</th>--> 
 			<th style="text-align: center;">擺放位置</th>
 			<th style="text-align: center;">詳細資訊</th>
 			<th style="text-align: center;">借用人</th>
@@ -51,7 +51,7 @@
 				<?php echo $value['name'];?>
 				</div>
 			</td>
-			<td style="text-align: center;"><?php echo $value['brand'];?></td>
+			<!-- <td style="text-align: center;"><?php echo $value['brand'];?></td>-->
 			<td style="text-align: center;"><?php echo $value['location_name'];?></td>
 			<td style="text-align: center;"><button type="button" class="btn btn-info" data-target="#info<?php echo $value['serial_id']?>" data-toggle="modal" >詳細資訊</button></td>
 			<td style="text-align: center;"><button type="button" class="<?php echo $value['applyButtonStyle'];?>" <?php echo $value['applyButtonExtraInfo'];?> ><?php echo $value['applyButtonString'];?></button></td>
