@@ -34,7 +34,7 @@
                 <li><a href="<?=base_url("/user/list_user")?>"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;會員列表</a></li>
 			<?php else : ?>
                 		<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;個人資料(待討論)</a></li>
-                		<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;財產借用列表</a></li>
+                		<li><a href="<?=base_url("/property/personal_pro")?>"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;財產借用列表</a></li>
 			<?php endif; ?>
 		<?php endif; ?>
               </ul>

@@ -237,6 +237,33 @@ class Property extends CI_Controller {
 		redirect('/property', 'refresh');
 	}
 	
+	// modify by Samuel @ 2014/09/10
+	// 個人財產借用頁面
+	public function personal_pro(){
+          
+		$data['title'] = "HSNG 財產管理平台";
+                // TBD 這個地方還沒有完成
+                //$data['propertyList'] = $this->property_model->get_property_by_location();
+                $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
+                $data['pageHeaderBig'] = "個人財產借用列表";
+                $data['pageHeaderSmall'] = "有借有還再借不難 ╰（‵□′）╯";
+                $data['session'] = $_SESSION;
+                $data['is_admin'] = true;
+                $data['user_name'] = "管理者";
+                $data['property_type_list'] = $this->property_model->get_propertyType();
+                $data['location_list'] = $this->property_model->get_location();
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('property/personal_property', $data);
+                $this->load->view('templates/footer');
+	}
+
+	// modify by Samuel @ 2014/09/10
+	// 個人歸還財產
+	public function property_return_apply($propertyId){
+		
+	}
+		
 	public function export($propertyId){
 		echo $propertyId;
 	}
@@ -246,18 +273,9 @@ class Property extends CI_Controller {
 	}
 
         public function topage($offset,$searchterm){
-		//echo "offset = ".$offset;
-                //echo "<pre>";
-                //print_r($offset);
-                //echo "</pre>";
-                /* pagination part */
                 $this->load->library('pagination');
                 $config = $this->setPageInfo($offset, $searchterm);
-		/*
-                echo "<pre>";
-                print_r($config);
-                echo "</pre>";
-		*/
+	
 		$this->pagination->initialize($config);
                 $data['pagination'] = $this->pagination->create_links();
 		$data['totalRows'] = $config['total_rows'];
@@ -319,9 +337,6 @@ class Property extends CI_Controller {
 			$data['propertyList'][$i]['applyButtonString'] = $applyButtonString;
 			$data['propertyList'][$i]['applyButtonStyle'] = $applyButtonStyle;
 			$data['propertyList'][$i]['applyButtonExtraInfo'] = $applyButtonExtraInfo;
-			//if($data['propertyList'][$i]['borrower'] != null && $data['propertyList'][$i]['is_approved'] == 1){
-			//	$data['propertyList'][$i]['borrowerName'] = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
-			//}
 		}
 
                 $data['pageHeaderBig'] = "財產列表";
