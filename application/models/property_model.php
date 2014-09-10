@@ -139,13 +139,16 @@ class Property_model extends CI_Model {
 		 return $query->result_array();	
 	}
 
-	public function getPersonalProperty($userId){
-		$sql = "SELECT pu.*, pr.id as property_id, pr.serial_id as property_serial_id, pr.location_id as location_id, pr.note as property_note, lo.name as lo.location_name
-			FROM property_usage pu LEFT JOIN property pr ON pu.property_id = pr.id, location lo
+	public function getPersonalPropertyByUserId($userId){
+		$sql = "SELECT pu.*, pr.id as property_id, pr.name as property_name, pr.serial_id as property_serial_id, pr.location_id as location_id, pr.note as property_note, lo.name as location_name, pt.name as property_type_name
+			FROM property_usage pu LEFT JOIN property pr ON pu.property_id = pr.id, location lo, property_type pt
 			WHERE pu.user_id = $userId
 			AND pr.location_id = lo.id
-		";
-		die($sql);
+			AND pr.property_type = pt.id
+			ORDER BY location_id ASC
+			";
+		$query = $this->db->query($sql);
+		return $query->result_array();
 	}
 
 	public function setPropertyUsageStatus($isApproved, $propertyUsageId){

@@ -212,7 +212,7 @@ class Property extends CI_Controller {
                 //$data['propertyList'] = $this->property_model->get_property_by_location();
                 $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
                 $data['pageHeaderBig'] = "財產借用審核頁面";
-                $data['pageHeaderSmall'] = "(不知道要填什麼)";
+                $data['pageHeaderSmall'] = "(╯-_-)╯ ~╩╩";
                 $data['session'] = $_SESSION;
                 $data['is_admin'] = true;
                 $data['user_name'] = "管理者";
@@ -240,28 +240,63 @@ class Property extends CI_Controller {
 	// modify by Samuel @ 2014/09/10
 	// 個人財產借用頁面
 	public function personal_pro(){
-          
+		
 		$data['title'] = "HSNG 財產管理平台";
                 // TBD 這個地方還沒有完成
-                //$data['propertyList'] = $this->property_model->get_property_by_location();
-		$data['personalPropertyList'] = $this->property_model->getPersonalProperty($_SESSION['user_id']);
-		die();
-                $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
-                $data['pageHeaderBig'] = "個人財產借用列表";
-                $data['pageHeaderSmall'] = "有借有還再借不難 ╰（‵□′）╯";
+                $data['personalPropertyList'] = $this->property_model->getPersonalPropertyByUserId($_SESSION['user_id']);
+		for($i = 0 ; $i < count($data['personalPropertyList']); $i++){
+			switch($data['personalPropertyList'][$i]['is_approved']){
+				case 0:
+					$data['personalPropertyList'][$i]['borrow_status'] = "未核準";
+					$data['personalPropertyList'][$i]['returnButtonString'] = "未核準";
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-danger";
+					$data['personalPropertyList'][$i]['extraInfo'] = "disabled";
+				break;
+				case 1:
+					$data['personalPropertyList'][$i]['borrow_status'] = "已核準";
+					$data['personalPropertyList'][$i]['returnButtonString'] = '<span class="glyphicon glyphicon-share-alt"></span> 歸還財產';
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-primary";
+					$data['personalPropertyList'][$i]['extraInfo'] = "";
+				break;
+				case -1:
+					$data['personalPropertyList'][$i]['borrow_status'] = "審核中";
+					$data['personalPropertyList'][$i]['returnButtonString'] = "審核中";
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-warning";
+					$data['personalPropertyList'][$i]['extraInfo'] = "disabled";
+				break;
+				default:
+					$data['personalPropertyList'][$i]['borrow_status'] = "狀態未知";
+				break;
+			}
+		}
+                $data['pageHeaderBig'] = $_SESSION['username']." 借用列表";
+                $data['pageHeaderSmall'] = "有借有還 再借不難 ╰（‵□′）╯"; 
+
                 $data['session'] = $_SESSION;
-                $data['property_type_list'] = $this->property_model->get_propertyType();
-                $data['location_list'] = $this->property_model->get_location();
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('property/personal_property', $data);
                 $this->load->view('templates/footer');
+
+         	/*
+		$data['title'] = "HSNG 財產管理平台";
+                // TBD 這個地方還沒有完成
+                //$data['propertyList'] = $this->property_model->get_property_by_location();
+		$data['personalPropertyList'] = $this->property_model->getPersonalPropertyByUserId($_SESSION['user_id']);
+                $data['pageHeaderBig'] = "個人財產借用列表";
+                $data['pageHeaderSmall'] = "123";
+                $data['session'] = $_SESSION;
+	
+                $this->load->view('templates/header', $data);
+                $this->load->view('property/personal_property', $data);
+                $this->load->view('templates/footer');
+		*/
 	}
 
 	// modify by Samuel @ 2014/09/10
 	// 個人歸還財產
 	public function property_return_apply($propertyId){
-		
+	;	
 	}
 		
 	public function export($propertyId){
