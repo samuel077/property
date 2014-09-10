@@ -77,3 +77,4 @@
         </div>
         <input type = "submit" name = "send_btn" class = "btn btn-default" value="確定"/>
 <?php echo form_close(); ?>
+</div><!-- -->
