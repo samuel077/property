@@ -272,7 +272,7 @@
       <form class="form-horizontal" role="form" action="<?=base_url("/property/borrow")?>" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><span class="glyphicon glyphicon-list"></span> &nbsp; <b>申請借用財產</b></h4>
+        <h6 class="modal-title"><span class="glyphicon glyphicon-list"></span> &nbsp; <b>申請借用財產</b></h4>
       </div>
       <div class="modal-body">
           <p><h3>確認是否申請借用財產&nbsp;『<?php echo $value['name']?>』</h3></p>

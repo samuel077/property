@@ -23,7 +23,7 @@
 			<td><?php echo $value['borrow_status']?></td>
                         <td><?php echo $value['issue_date'];?></td>
                         <td>
-                        <button type="button" class="<?php echo $value['returnButtonStyle'];?>" <?php echo $value['extraInfo'];?> onclick="javascript:location.href='<?=base_url("/property/return_pro/")?><?php echo "/".$value['id']?>'"><?php echo $value['returnButtonString'];?></button>
+                        <button type="button" class="<?php echo $value['returnButtonStyle'];?>" <?php echo $value['extraInfo'];?> <?php echo $value['linkURL'];?>"><?php echo $value['returnButtonString'];?></button>
                         &nbsp;
                         </td>
                 </tr>

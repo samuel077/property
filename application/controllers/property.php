@@ -19,15 +19,6 @@ class Property extends CI_Controller {
 	
         public function index()
         {	
-		
-		//echo "<pre>";
-                //print_r($_POST);
-                //echo "</pre>";
-		//die("1234");		
-                // 沒有被設定過
-//		echo "<pre>";
-//		print_r($_SESSION);
-//		echo "</pre>";
                 if(isset($_POST['offset']) && $_POST['offset'] != ""){
                         $this->topage($_POST['offset'],"");
                 }
@@ -115,11 +106,7 @@ class Property extends CI_Controller {
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
 
-		//$this->load->view('property/location_scroll', $data);
-		
-                //$this->load->view('property/location_header', $data);
                 $this->load->view('property/location_scroll', $data);
-                //$this->load->view('templates/footer');
 		
 
 	}
@@ -214,9 +201,9 @@ class Property extends CI_Controller {
                 $data['pageHeaderBig'] = "財產借用審核頁面";
                 $data['pageHeaderSmall'] = "(╯-_-)╯ ~╩╩";
                 $data['session'] = $_SESSION;
-                $data['is_admin'] = true;
-                $data['user_name'] = "管理者";
+		$data['is_admin'] = true;
 		$data['propertyBorrowList'] = $this->property_model->getPropertyBorrowUnsignedList();
+		$data['propertyReturnList'] = $this->property_model->getPropertyReturnUnsignedList();
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('property/application', $data);
@@ -226,17 +213,34 @@ class Property extends CI_Controller {
 	// modify by Samuel @ 2014/09/09
 	// 同意借用財產
 	public function approve_app($propertyUsageId){
-		$this->property_model->setPropertyUsageStatus(true, $propertyUsageId);
+		$this->property_model->setPropertyUsageStatus("approvedApply", $propertyUsageId);
 		redirect('/property', 'refresh');
 	}
 	
 	// modify by Samuel @ 2014/09/09
 	// 不同意借用財產
-	public function disapprove_app($propertyId){
-		$this->property_model->setPropertyUsageStatus(false, $propertyUsageId);
+	public function disapprove_app($propertyUsageId){
+		$this->property_model->setPropertyUsageStatus("disapprovedApply", $propertyUsageId);
 		redirect('/property', 'refresh');
 	}
+
+	// modify by Samuel @ 2014/09/10
+	// 個人歸還財產
+	public function return_pro($propertyUsageId){
+		// 可能要先做 check 看看這個人 是否有借這筆財產，而且 is_approved = 1(表示已經有審核通過)
+		$this->property_model->setPropertyUsageStatus("returnApply", $propertyUsageId);
+		redirect('/property/personal_pro', 'refresh');
+	}
+
+	// modify by Samuel @ 2014/09/10
+	// 個人歸還財產
+	public function return_pro_check($propertyUsageId){
+		// 可能要先做 check 看看這個人 是否有借這筆財產，而且 is_approved = 1(表示已經有審核通過)
+		$this->property_model->setPropertyUsageStatus("returnConfirm", $propertyUsageId);
+		redirect('/property/application', 'refresh');
+	}
 	
+
 	// modify by Samuel @ 2014/09/10
 	// 個人財產借用頁面
 	public function personal_pro(){
@@ -245,24 +249,41 @@ class Property extends CI_Controller {
                 // TBD 這個地方還沒有完成
                 $data['personalPropertyList'] = $this->property_model->getPersonalPropertyByUserId($_SESSION['user_id']);
 		for($i = 0 ; $i < count($data['personalPropertyList']); $i++){
-			switch($data['personalPropertyList'][$i]['is_approved']){
-				case 0:
-					$data['personalPropertyList'][$i]['borrow_status'] = "未核準";
-					$data['personalPropertyList'][$i]['returnButtonString'] = "未核準";
-					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-danger";
-					$data['personalPropertyList'][$i]['extraInfo'] = "disabled";
-				break;
+			switch($data['personalPropertyList'][$i]['borrow_status_id']){
 				case 1:
+					$data['personalPropertyList'][$i]['borrow_status'] = "審核中...";
+					$data['personalPropertyList'][$i]['returnButtonString'] = "審核中...";
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-default";
+					$data['personalPropertyList'][$i]['extraInfo'] = "";
+					$data['personalPropertyList'][$i]['linkURL'] = "";
+				break;
+				case 2:
 					$data['personalPropertyList'][$i]['borrow_status'] = "已核準";
 					$data['personalPropertyList'][$i]['returnButtonString'] = '<span class="glyphicon glyphicon-share-alt"></span> 歸還財產';
 					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-primary";
 					$data['personalPropertyList'][$i]['extraInfo'] = "";
+					$data['personalPropertyList'][$i]['linkURL'] = "onclick=\"javascript:location.href='".base_url('/property/return_pro/')."/".$data['personalPropertyList'][$i]['id']."'\"";
 				break;
-				case -1:
-					$data['personalPropertyList'][$i]['borrow_status'] = "審核中";
-					$data['personalPropertyList'][$i]['returnButtonString'] = "審核中";
-					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-warning";
-					$data['personalPropertyList'][$i]['extraInfo'] = "disabled";
+				case 3:
+					$data['personalPropertyList'][$i]['borrow_status'] = "未核準借用";
+					$data['personalPropertyList'][$i]['returnButtonString'] = "未核準借用";
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-danger";
+					$data['personalPropertyList'][$i]['extraInfo'] = "";
+					$data['personalPropertyList'][$i]['linkURL'] = "";
+				break;
+				case 4:
+					$data['personalPropertyList'][$i]['borrow_status'] = "確認歸還中...";
+					$data['personalPropertyList'][$i]['returnButtonString'] = "確請歸還中...";
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-default";
+					$data['personalPropertyList'][$i]['extraInfo'] = "";
+					$data['personalPropertyList'][$i]['linkURL'] = "";
+				break;
+				case 5:
+					$data['personalPropertyList'][$i]['borrow_status'] = "已歸還財產";
+					$data['personalPropertyList'][$i]['returnButtonString'] = "已歸還財產";
+					$data['personalPropertyList'][$i]['returnButtonStyle'] = "btn btn-success";
+					$data['personalPropertyList'][$i]['extraInfo'] = "";
+					$data['personalPropertyList'][$i]['linkURL'] = "";
 				break;
 				default:
 					$data['personalPropertyList'][$i]['borrow_status'] = "狀態未知";
@@ -292,13 +313,7 @@ class Property extends CI_Controller {
                 $this->load->view('templates/footer');
 		*/
 	}
-
-	// modify by Samuel @ 2014/09/10
-	// 個人歸還財產
-	public function property_return_apply($propertyId){
-	;	
-	}
-		
+	
 	public function export($propertyId){
 		echo $propertyId;
 	}
@@ -345,28 +360,49 @@ class Property extends CI_Controller {
 			else if($data['propertyList'][$i]['borrower'] == $_SESSION['user_id']){
 				// 是自己借的
 				// is_approved = -1 表示審核中
-				if($data['propertyList'][$i]['is_approved'] == -1){
+				if($data['propertyList'][$i]['borrow_status_id'] == 1){
 					$applyButtonString = "申請審核中";
 					$applyButtonStyle = "btn btn-warning";
 					$applyButtonExtraInfo = "disabled";
 				}
-				else if($data['propertyList'][$i]['is_approved'] == 1){
+				else if($data['propertyList'][$i]['borrow_status_id'] == 2){
 					$applyButtonString = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
 					$applyButtonStyle = "btn btn-default";
 					$applyButtonExtraInfo = "disabled";
 				}
+				else if($data['propertyList'][$i]['borrow_status_id'] == 3 || $data['propertyList'][$i]['borrow_status_id'] == 5){
+					// 用借失敗 或是已經歸還 這筆資料就不屬於任何人 可以再讓大家借用
+					$applyButtonString = "申請借用";
+                                        $applyButtonStyle = "btn btn-primary";
+                                        $applyButtonExtraInfo = 'data-target="#borrow'.$data['propertyList'][$i]['serial_id'].'" data-toggle="modal"';
+				}
+				else if($data['propertyList'][$i]['borrow_status_id'] == 4){
+					$applyButtonString = "歸還確認中";
+                                        $applyButtonStyle = "btn btn-warning";
+                                        $applyButtonExtraInfo = "disabled";
+				}
 			}
 			else{
 				// 是別人借的
-                                if($data['propertyList'][$i]['is_approved'] == -1){
+                                if($data['propertyList'][$i]['borrow_status_id'] == 1){
                                         $applyButtonString = "它人已申請";
                                         $applyButtonStyle = "btn btn-warning";
 					$applyButtonExtraInfo = "disabled";
                                 }
-                                else if($data['propertyList'][$i]['is_approved'] == 1){
+                                else if($data['propertyList'][$i]['borrow_status_id'] == 2){
                                         $applyButtonString = $this->user_model->getUserNameByUserId($data['propertyList'][$i]['borrower']);
                                         $applyButtonStyle = "btn btn-default";
 					$applyButtonExtraInfo = "disabled";
+                                }
+				else if($data['propertyList'][$i]['borrow_status_id'] == 3 || $data['propertyList'][$i]['borrow_status_id'] == 5){
+                                        $applyButtonString = "申請借用";
+                                        $applyButtonStyle = "btn btn-primary";
+                                        $applyButtonExtraInfo = 'data-target="#borrow'.$data['propertyList'][$i]['serial_id'].'" data-toggle="modal"';
+                                }
+                                else if($data['propertyList'][$i]['borrow_status_id'] == 4){
+                                        $applyButtonString = "歸還確認中";
+                                        $applyButtonStyle = "btn btn-warning";
+                                        $applyButtonExtraInfo = "disabled";
                                 }
 			}
 			$data['propertyList'][$i]['applyButtonString'] = $applyButtonString;

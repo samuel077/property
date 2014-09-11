@@ -10,7 +10,7 @@ class Property_model extends CI_Model {
         public function get_property($offset, $limit, $searchterm)
         {
 		//echo "message from property_mode, searchterm = ".$searchterm."<br/>";
-		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name, pu.user_id as borrower, pu.is_approved 
+		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name, pu.user_id as borrower, pu.borrow_status_id 
 			FROM property pr LEFT JOIN property_usage pu ON pr.id = pu.property_id, 
 			location lo, property_type pt
 			WHERE
@@ -75,18 +75,26 @@ class Property_model extends CI_Model {
 	}
 
 	public function borrowPropertyByUserId($userId, $propertyId){
-		echo "got you here in model";
-		echo "usre id = ".$userId." and propertyId = ".$propertyId;
-		                // 使用 post 的資料來 set 資料庫
+		// 使用 post 的資料來 set 資料庫
                 $this->load->helper('url');
+
+		/*
+			borrow status :  
+			1 是借用申請中
+			2 借用申請通過
+			3 借用申請失敗
+			4 歸還財產申請
+			5 管理者已確認歸還
+		*/
 
 		$propertyUsage = array(
 			'user_id' => $userId, 
 			'property_id' => $propertyId, 
 			'issue_date' => date("Y-m-d H:i:s"), 
-			'is_approved' => -1, 
+			'return_time' => null, 
 			'admin_sign_date' => null, 
-			'execuse' => null, 
+			'execuse' => null,
+			'borrow_status_id' => 1,  
 			'note' => null
 		);
 
@@ -133,11 +141,27 @@ class Property_model extends CI_Model {
 			pu.user_id = ur.id
 			AND pu.property_id = pr.id
 			AND pt.id = pr.property_type
-			AND pu.is_approved = -1
+			AND pu.borrow_status_id = 1
 			";
 		 $query = $this->db->query($sql);
 		 return $query->result_array();	
 	}
+
+	// modified by Samuel @ 2014/09/09
+        // 用來 query 使用者借用財產的紀錄
+        public function getPropertyReturnUnsignedList(){
+                // is approved = -1 表示剛申請，申請通過為1，不通過為0
+                $sql = "SELECT pr.serial_id, pr.name, pr.brand, pt.name as property_type_name, ur.name as borrower, pu.issue_date, pu.id as appId
+                        FROM property pr, property_type pt, user ur, property_usage pu
+                        WHERE
+                        pu.user_id = ur.id
+                        AND pu.property_id = pr.id
+                        AND pt.id = pr.property_type
+                        AND pu.borrow_status_id = 4
+                        ";
+                 $query = $this->db->query($sql);
+                 return $query->result_array();
+        }
 
 	public function getPersonalPropertyByUserId($userId){
 		$sql = "SELECT pu.*, pr.id as property_id, pr.name as property_name, pr.serial_id as property_serial_id, pr.location_id as location_id, pr.note as property_note, lo.name as location_name, pt.name as property_type_name
@@ -151,18 +175,37 @@ class Property_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function setPropertyUsageStatus($isApproved, $propertyUsageId){
-		if($isApproved){
-			$data = array('is_approved' => '1');
-		}else{
-			$data = array('is_approved' => '0');
+	public function setPropertyUsageStatus($borrowStatus, $propertyUsageId){
+		switch($borrowStatus){
+			case "approvedApply" :
+				$data = array('borrow_status_id' => '2');
+			break;
+			case "disapprovedApply" :
+				$data = array('borrow_status_id' => '3');
+			break;
+			case "returnApply" :
+				$data = array('borrow_status_id' => '4', 
+					'return_time' => date('Y-m-d H:i:s') 
+				);
+			break;
+			case "returnConfirm" :
+				$data = array('borrow_status_id' => '5');
+			break;
+			default :
+				// error here
+			break;
+			
 		}
 		
 		$this->db->where('id', $propertyUsageId);
                 $this->db->update('property_usage', $data);
 
 	}
-	
+
+	public function setPropertyUsageReturnToday($propertyUsageId){
+		//$propertyUsage = array(return_time =>)	
+	}	
+
 	public function set_property(){
 		// 使用 post 的資料來 set 資料庫
 		$this->load->helper('url');
