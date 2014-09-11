@@ -89,11 +89,15 @@ class Property extends CI_Controller {
 		$locationList = $this->property_model->get_location();
 		foreach($locationList as $value => $location)
 		{
-			$data['ptList'][$location['id']]['propertyList'] = $this->property_model->get_property_by_location($location['id']);
+			$data['ptList'][$location['id']]['propertyList'] = $this->property_model->getPropertyByLocation($location['id']);
 			$data['ptList'][$location['id']]['name'] = $location['name'];
 			$data['ptList'][$location['id']]['id'] = $location['id'];
+			for($i = 0 ; $i < count($data['ptList'][$location['id']]['propertyList']); $i ++){
+				$borrowerName = $this->property_model->getBorrowerNameByPropertyId($data['ptList'][$location['id']]['propertyList'][$i]['id']);
+				// 分兩段寫是因為… 太長了 
+				$data['ptList'][$location['id']]['propertyList'][$i]['borrowerName'] = $borrowerName;
+			}
 		} 
-		
                 $data['pageHeaderBig'] = "財產列表";
                 $data['pageHeaderSmall'] = "以放置地區區分";
                 $data['session'] = $_SESSION;
@@ -107,8 +111,6 @@ class Property extends CI_Controller {
                 $data['location_list'] = $this->property_model->get_location();
 
                 $this->load->view('property/location_scroll', $data);
-		
-
 	}
 
 	 // add @ 2014/09/04
@@ -198,14 +200,14 @@ class Property extends CI_Controller {
                 // TBD 這個地方還沒有完成
                 //$data['propertyList'] = $this->property_model->get_property_by_location();
                 $data['propertyList'] = $this->property_model->get_property(0, $this->perpage, "");
-                $data['pageHeaderBig'] = "財產借用審核頁面";
+                $data['pageHeaderBig'] = "財產變動審核頁面";
                 $data['pageHeaderSmall'] = "(╯-_-)╯ ~╩╩";
                 $data['session'] = $_SESSION;
 		$data['is_admin'] = true;
 		$data['propertyBorrowList'] = $this->property_model->getPropertyBorrowUnsignedList();
 		$data['propertyReturnList'] = $this->property_model->getPropertyReturnUnsignedList();
 
-                $this->load->view('templates/header', $data);
+                $this->load->view('templates/header_without_fixed_div', $data);
                 $this->load->view('property/application', $data);
                 $this->load->view('templates/footer');
 	}

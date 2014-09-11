@@ -48,7 +48,7 @@ class Property_model extends CI_Model {
 		*/
         }
 
-	public function get_property_by_location($location_id){
+	public function getPropertyByLocation($location_id){
 		$sql = "SELECT pr.*, lo.name as location_name, pt.name as property_type_name
                         from property pr, location lo, property_type pt
                         where 
@@ -58,6 +58,20 @@ class Property_model extends CI_Model {
 			AND pr.location_id = $location_id";
 		$query = $this->db->query($sql);
 		return $query->result_array();	
+	}
+	public function getBorrowerNameByPropertyId($propertyId){
+		$sql = "SELECT ur.name
+			FROM user ur, property_usage pu
+			WHERE pu.property_id = $propertyId
+			AND pu.user_id = ur.id
+			AND (pu.borrow_status_id = 2 OR pu.borrow_status_id = 4)";
+		$query = $this->db->query($sql);
+		if($query->num_rows() == 0){
+			return "未借出";
+		}else if ( $query->num_rows() == 1){
+			$result = $query->result_array();
+			return $result[0]['name'];
+		}
 	}
 	
 	public function get_propertyType(){

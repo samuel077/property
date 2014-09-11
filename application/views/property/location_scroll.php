@@ -7,6 +7,7 @@
 <title>Example of Twitter Bootstrap 3 ScrollSpy</title>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<?=base_url("/public/css/navbar.css")?>">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -129,7 +130,7 @@ ul.nav-tabs.affix {
   <div style="height:auto; width:auto;">
         <?php if( !empty($pageHeaderBig)) : ?>
         <!-- we need a form here.-->
-        <div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:180;"><b><?php echo $pageHeaderBig;?></b><small><b><?php echo $pageHeaderSmall;?></b></small></h1></div>
+        <div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:300;"><b><?php echo $pageHeaderBig;?></b><small><b><?php echo $pageHeaderSmall;?></b></small></h1></div>
         <?php endif; ?>
 
     <div class="row">
@@ -173,7 +174,7 @@ ul.nav-tabs.affix {
                         <td><?php echo $value['property_type_name'];?></td>
                         <td><?php echo $value['purchase_date'];?></td>
                         <td><?php echo $value['expire_info'];?></td>
-                        <td>待實作</td>
+                        <td><?php echo $value['borrowerName'];?></td>
                 </tr>
         <?php endforeach; ?>
         </table>
@@ -182,6 +183,10 @@ ul.nav-tabs.affix {
     </div>
  
     </div></div>
+    <div style="height:50px;"></div>
+<p style="text-align:center;"><strong >2014 &nbsp; &copy; HSNG(ANT)財產管理網頁 &nbsp;<br/>
+designed by : hungo, tutu, Samuel, Bird </strong></p>
+</p>
 </div>
 </body>
 </html>
