@@ -130,7 +130,7 @@ ul.nav-tabs.affix {
   <div style="height:auto; width:auto;">
         <?php if( !empty($pageHeaderBig)) : ?>
         <!-- we need a form here.-->
-        <div class="page-header"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:300;"><b><?php echo $pageHeaderBig;?></b><small><b><?php echo $pageHeaderSmall;?></b></small></h1></div>
+        <div class="page-header" style="margin-left:180px;"> <h1 style="align:center; font-family:Microsoft JhengHei; margin-left:300;"><b><?php echo $pageHeaderBig;?></b><small><b><?php echo $pageHeaderSmall;?></b></small></h1></div>
         <?php endif; ?>
 
     <div class="row">
