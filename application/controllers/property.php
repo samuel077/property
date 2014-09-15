@@ -18,7 +18,11 @@ class Property extends CI_Controller {
         }
 	
         public function index()
-        {	
+        {
+		$this->load->library('identity');
+		$identity = $this->identity->judge_identity($_SESSION['user_id']);
+		echo $identity;
+			
                 if(isset($_POST['offset']) && $_POST['offset'] != ""){
                         $this->topage($_POST['offset'],"");
                 }
