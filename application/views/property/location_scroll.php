@@ -136,11 +136,12 @@ ul.nav-tabs.affix {
     <div class="row">
         <div class="col-xs-3" id="myScrollspy">
             <ul class="nav nav-tabs nav-stacked affix-top" data-spy="affix" data-offset-top="125">
-                <li><a href="#LAB315">Section One</a></li>
-                <li><a href="#LAB501">Section Two</a></li>
-                <li><a href="#LAB402">Section Three</a></li>
-                <li><a href="#LAB510A">Section Four</a></li>
-                <li><a href="#LAB501D">Section Five</a></li>
+                <li><a href="#LAB315">LAB 315</a></li>
+                <li><a href="#LAB501">LAB 501</a></li>
+                <li><a href="#LAB402">LAB 402</a></li>
+                <li><a href="#LAB510A">LAB 510A</a></li>
+                <li><a href="#LAB501D">LAB 501D</a></li>
+                <li><a href="#R206">R 206</a></li>
             </ul>
         </div>
 	<div class="col-xs-9" >
