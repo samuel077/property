@@ -109,8 +109,9 @@ class Property extends CI_Controller {
                 $data['user_name'] = $_SESSION['username'];
                 $data['property_type_list'] = $this->property_model->get_propertyType();
                 $data['location_list'] = $this->property_model->get_location();
-
+		$this->load->view('property/location_scroll_header', $data);
                 $this->load->view('property/location_scroll', $data);
+		$this->load->view('templates/footer');
 	}
 
 	 // add @ 2014/09/04
