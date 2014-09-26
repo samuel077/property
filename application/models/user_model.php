@@ -73,7 +73,44 @@ class User_model extends CI_Model {
 	else
 		return FALSE;
     } 
- 
+
+    // modified by Samuel @ 2014/09/26
+    // 使用者在設定的頁面更改自己的個人資料
+    function updateUserBySettingPage($userId) {
+	
+	switch($this->input->post('identity_type')){
+	    case 1:
+                    $expected_graduate_year = $this->input->post('enroll_year') + 2;//大學專題生
+            break;
+            case 2:
+                    $expected_graduate_year = $this->input->post('enroll_year') + 2;//研究生
+            break;
+            case 3:
+                    $expected_graduate_year = $this->input->post('enroll_year') + 5;//博班生
+            break;
+	}
+
+	$data = array(
+	    'name' => $this->input->post('name'), // checked
+            'school_id' => $this->input->post('school_id'), // checked
+            // 'account' => $this->input->post('account'), // account 不能做修改
+            // 'password' => md5($this->input->post('passwd')), // passwd 在另外的頁面
+            'phone_number' => $this->input->post('phone_number'), // checked 
+            'email' => $this->input->post('email'), // checked
+            'enroll_year' => $this->input->post('enroll_year'), // checked
+            'expected_graduate_year' => $expected_graduate_year, // checked
+            'identity_type' => $this->input->post('identity_type') // checked
+	);
+
+	$this->db->where('id', $userId);
+	$this->db->update('user', $data);
+	// 有 update 成功，affected_rows() = 1
+	if( $this->db->affected_rows() > 0 )
+		return TRUE;
+	else
+		return FALSE;	
+    }
+
     function login_check($account,$passwd)    
     {
  
@@ -105,6 +142,18 @@ class User_model extends CI_Model {
 	$a = $query->result_array();
 	return $a[0]['name'];
     }
+
+    // modify by Samuel @ 2014/09/09
+    // 取得 user 的 名字
+    public function getUserByUserId($userId){
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('id', $userId);
+        $query = $this->db->get();
+        $a = $query->result_array();
+        return $a[0];
+    }
+
 
     function list_user()
     {

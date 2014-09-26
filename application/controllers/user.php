@@ -180,5 +180,27 @@ Class User extends CI_Controller {
         {
 
         }
+
+	// modify by Samuel @ 2014/09/26
+	// this function is used for changing the personal information 
+	public function setting(){
+                $data['title'] = "HSNG 財產管理平台";
+                $data['pageHeaderBig'] = "個人帳號資訊";
+                $data['pageHeaderSmall'] = "v(￣︶￣)y";
+                $data['session'] = $_SESSION;
+
+		if(!empty($_POST)){
+			if($this->user_model->updateUserBySettingPage($_SESSION['user_id']))
+				echo '<script>alert("更新成功");</script>';
+			else
+				echo '<script>alert("更新失敗");</script>';
+		}
+
+		$data['user'] = $this->user_model->getUserByUserId($_SESSION['user_id']);
+		
+		$this->load->view('templates/header', $data);
+                $this->load->view('user/setting');
+                $this->load->view('templates/footer');		
+	}
 }
 ?>

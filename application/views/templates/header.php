@@ -64,7 +64,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['username'];?><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu" style="width:50px;">
-                <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;設定</a></li>
+                <li><a href="<?=base_url("/user/setting")?>"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;設定</a></li>
                 <li><a href="<?=base_url("/user/logout")?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;登出</a></li>
               </ul>
           </li>
