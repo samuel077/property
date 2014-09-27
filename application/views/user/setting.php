@@ -6,7 +6,7 @@
 	<div class = "form-group">
             <label class = "col-sm-3 control-label">使用者帳號</label>
             <div class = "col-sm-5">
-            <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value="<?php echo $user['name'];?>" disabled/> 
+            <input name = "account" type = "text" class = "form-control" placeholder = "請輸入使用者帳號" value="<?php echo $user['account'];?>" disabled/> 
             </div>
         </div>
 

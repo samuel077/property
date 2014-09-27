@@ -188,6 +188,10 @@ Class User extends CI_Controller {
                 $data['pageHeaderBig'] = "個人帳號資訊";
                 $data['pageHeaderSmall'] = "v(￣︶￣)y";
                 $data['session'] = $_SESSION;
+		if($_SESSION['hsng_role_id'] == 1)
+			$data['is_admin'] = true;
+		else
+			$data['is_admin'] = false;
 
 		if(!empty($_POST)){
 			if($this->user_model->updateUserBySettingPage($_SESSION['user_id']))
@@ -201,6 +205,22 @@ Class User extends CI_Controller {
 		$this->load->view('templates/header', $data);
                 $this->load->view('user/setting');
                 $this->load->view('templates/footer');		
+	}
+
+	public function change_password(){
+		//echo "success";
+		
+		$data['user'] = $this->user_model->getUserByUserId($_SESSION['user_id']);
+		if(md5($_POST['origin']) != $data['user']['password']){
+			echo "fail_2";
+		}else{
+			// password 的正確性 前面有判斷過惹 
+			if($this->user_model->setUserNewPassword($_SESSION['user_id'], $_POST['new_pw']))
+				echo "success";
+			else
+				echo "fail_1";
+		}
+
 	}
 }
 ?>

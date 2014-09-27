@@ -154,6 +154,19 @@ class User_model extends CI_Model {
         return $a[0];
     }
 
+    function setUserNewPassword($userId, $newPassWord){
+	$data = array(
+            'password' => md5($newPassWord)
+        );
+
+	$this->db->where('id', $userId);
+        $this->db->update('user', $data);
+        // 有 update 成功，affected_rows() = 1
+        if( $this->db->affected_rows() > 0 )
+                return TRUE;
+        else
+                return FALSE;
+    }
 
     function list_user()
     {
