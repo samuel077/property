@@ -416,6 +416,7 @@ class Property extends CI_Controller {
 			$data['propertyList'][$i]['applyButtonString'] = $applyButtonString;
 			$data['propertyList'][$i]['applyButtonStyle'] = $applyButtonStyle;
 			$data['propertyList'][$i]['applyButtonExtraInfo'] = $applyButtonExtraInfo;
+			$data['propertyList'][$i]['borrowerName'] = $applyButtonString;
 		}
 
                 $data['pageHeaderBig'] = "財產列表";
