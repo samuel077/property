@@ -57,6 +57,7 @@ Class User extends CI_Controller {
                 if($result->hsng_role_id == 1)
                 {
 		    $_SESSION['username'] = $result->name;
+w
 		    $_SESSION['hsng_role_id'] = $result->hsng_role_id;
 		    $_SESSION['id'] = $result->id;
 	
@@ -208,12 +209,15 @@ Class User extends CI_Controller {
 	}
 
 	public function change_password(){
-		//echo "success";
-		
+		//echo "success";	
 		$data['user'] = $this->user_model->getUserByUserId($_SESSION['user_id']);
 		if(md5($_POST['origin']) != $data['user']['password']){
 			echo "fail_2";
-		}else{
+		}else if($_POST['origin'] == $_POST['new_pw']){
+			// 更新的密碼兩次是相同的，直接return success
+			echo "success";
+		}
+		else{
 			// password 的正確性 前面有判斷過惹 
 			if($this->user_model->setUserNewPassword($_SESSION['user_id'], $_POST['new_pw']))
 				echo "success";

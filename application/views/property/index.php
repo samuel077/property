@@ -202,7 +202,7 @@
 	  <div class="form-group">
 	    <label class="col-sm-3 control-label">借用人：</label>
 	    <div class="col-sm-5">
-	      <p class="form-control-static">TBD</p>
+	      <p class="form-control-static"><?php echo $value['borrowerName'];?></p>
 	    </div>
 	  </div>
 	  <div class="form-group">

@@ -15,7 +15,7 @@ function change_password(url){
         var new_pw_con=document.getElementById('cpm_new_pw_con').value;
 
 	if(new_pw == new_pw_con)
-	{	
+	{
         	xmlhttp=null;
         	if(window.XMLHttpRequest){
                 	xmlhttp= new XMLHttpRequest();
@@ -48,6 +48,7 @@ if (xmlhttp.readyState==4)
     {// 200 = "OK"
 	if(xmlhttp.responseText == "success"){
 		alert("密碼已重置");
+		reset_password_modal();
 	}
 	else if(xmlhttp.responseText == "fail_1"){
 		alert("密碼重置失敗，請聯絡管理員");
