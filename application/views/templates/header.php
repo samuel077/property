@@ -80,7 +80,7 @@ function reset_password_modal(){
       <form class="form-horizontal" role="form" action="<?=base_url("/user/change_password")?>" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><span class="glyphicon glyphicon-list"></span> &nbsp; <b>變更密碼</b></h4>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-refresh"></span> &nbsp; <b>變更密碼</b></h4>
       </div>
       <div class="modal-body">
 	  <div class="form-group">
@@ -135,7 +135,7 @@ function reset_password_modal(){
 			<?php if($is_admin) : ?>
                 <li><a href="<?=base_url("/user/list_user")?>"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;會員列表</a></li>
 			<?php else : ?>
-                		<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;個人資料(待討論)</a></li>
+                		<!-- <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;個人資料(待討論)</a></li> -->
                 		<li><a href="<?=base_url("/property/personal_pro")?>"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;財產借用列表</a></li>
 			<?php endif; ?>
 		<?php endif; ?>
@@ -147,7 +147,7 @@ function reset_password_modal(){
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理者專區<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?=base_url("/property/create")?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;財產單筆新建</a></li>
-                <li><a href="<?=base_url("/property/import")?>"><span class="glyphicon glyphicon-import"></span>&nbsp;&nbsp;財產匯入</a></li>
+                <!-- <li><a href="<?=base_url("/property/import")?>"><span class="glyphicon glyphicon-import" disabled;></span>&nbsp;&nbsp;財產匯入</a></li> -->
                 <li><a href="<?=base_url("/property/location")?>"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;依地區列出財產</a></li>
                 <li><a href="<?=base_url("/property/dumplist")?>"><span class="glyphicon glyphicon-remove-sign" style="color:red;"></span>&nbsp;&nbsp;可報廢財產列表</a></li>
                 <li><a href="<?=base_url("/property/countedlist")?>"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;年度清點財產結果</a></li>

@@ -8,6 +8,11 @@ Class User extends CI_Controller {
             parent::__construct();
 	    session_start();
             $this->load->model('user_model');
+	    // modified by Samuel @ 2014/09/09
+	    // 一般來說，user 的使用都需 session 才行，若沒有 session 存在，則導回首頁。
+	    if(!isset($_SESSION['user_id'])){
+		    redirect('/', 'refresh');
+	    }
         }
         
         public function index()

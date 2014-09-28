@@ -30,8 +30,8 @@
 	<table class="table table-striped table-hover" style=" font-family:Microsoft JhengHei;">
 	<thead> 
 		<tr>
-			<th>財產編號</th>
-			<th>名稱</th>
+			<th style="text-align: center;">財產編號</th>
+			<th style="text-align: center;">名稱</th>
 			<!-- <th style="text-align: center;">廠牌</th>--> 
 			<th style="text-align: center;">擺放位置</th>
 			<th style="text-align: center;">詳細資訊</th>

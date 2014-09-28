@@ -301,6 +301,7 @@ class Property extends CI_Controller {
                 $data['pageHeaderSmall'] = "有借有還 再借不難 ╰（‵□′）╯"; 
 
                 $data['session'] = $_SESSION;
+		$data['is_admin'] = false;
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('property/personal_property', $data);
